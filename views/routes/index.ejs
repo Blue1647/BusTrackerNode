@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="refresh" content="600">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/roboto.min.css" rel="stylesheet">
+    <link href="css/material.min.css" rel="stylesheet">
+    <link href="css/ripples.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <title>Bus/Train Tracker</title>
+</head>
+
+<body>
+    <div class="container wide wrap">
+        <!--<img src="img/logo.jpg" width = "100%"/>-->
+
+        &nbsp;
+        <!--Curr time-->
+        <h1 class="text-center" id="time"></h1>
+        <!-- Bus Tracker -->
+        <div class="busPanels">
+            <!--60 bus-->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel panel-default west60-panel">
+                        <div class="panel-heading">60 Blue Island/26th <em><strong>Westbound</strong></em> to <strong>Cicero</strong> and <strong>24th Place</strong>
+                        </div>
+                        <div class="panel-body errWest60">
+                            Expected Bus Arrival Times:
+                            <div class="west60"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default east60-panel">
+                        <div class="panel-heading">60 Blue Island/26th <em><strong>Eastbound</strong></em> to <strong>Randolph</strong> &amp; <strong>Harbor Dr</strong>
+                        </div>
+                        <div class="panel-body errEast60">
+                            Expected Bus Arrival Times:
+                            <div class="east60"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default west18-panel">
+                        <div class="panel-heading">18 16th-18th <em><strong>Westbound</strong></em> to <strong>16th</strong> and <strong>Cicero</strong>
+                        </div>
+                        <div class="panel-body errWest18">
+                            Expected Bus Arrival Times:
+                            <div class="west18"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--18 bus-->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel panel-default east18-panel">
+                        <div class="panel-heading">18 16th-18th <em><strong>Eastbound</strong></em> to <strong>Michigan Avenue</strong>
+                        </div>
+                        <div class="panel-body errEast18">
+                            Expected Bus Arrival Times:
+                            <div class="east18"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default pl-panel">
+                        <div class="panel-heading">Pink Line to <strong>54th</strong> and <strong>Cermak</strong></div>
+                        <div class="panel-body errPl54">
+                            Expected Train Arrival Times:
+                            <div class="Pl54"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default pl-panel">
+                        <div class="panel-heading">Pink Line to <strong>Loop</strong></div>
+                        <div class="panel-body errPlLoop">
+                            Expected Train Arrival Times:
+                            <div class="PlLoop"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Weather Panel-->
+        <div class="weatherPanels">
+            <div class="row">
+                <div class="panel panel-default weather-panel">
+                    <div class="panel-heading curr-heading"></div>
+                    <div class="panel-body curr-body">
+                        <div class="row">
+                            <div class="col-md-2"><img id="condIco" src="" /></div>
+                            <div class="temp cond col-md-10 tempCond"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="day1 panel panel-default">
+                        <div class="panel-heading day1-heading">Tomorrow</div>
+                        <div class="panel-body day1-panel text-center">
+                            <img class="day1-ico" src="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="day2 panel panel-default">
+                        <div class="panel-heading day2-heading">Next Day</div>
+                        <div class="panel-body day2-panel text-center">
+                            <img class="day2-ico" src="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="day3 panel panel-default">
+                        <div class="panel-heading day3-heading">Next Next Day</div>
+                        <div class="panel-body day3-panel text-center">
+                            <img class="day3-ico" src="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Social Panel -->
+        <div class="socialPanels">
+          <div class="row text-center">
+          <h1> Follow Us! </h1>
+          <div class="row ">
+                <div class="col-md-4"><!-- facebook -->
+                  <div class="col-padding">
+                    <img src="img/socialIcons/facebook44.png" />
+                    <h2>facebook.com/blue1647</h2>
+                  </div>
+                </div>
+                <div class="col-md-4"><!-- instagram -->
+                  <div class="col-padding">
+                    <img src="img/socialIcons/instagram10.png"/>
+                    <h2> @blue1647chicago</h2>
+                 </div>
+                </div>
+                <div class="col-md-4"><!-- twitter -->
+                  <div class="col-padding">
+                    <img src="img/socialIcons/twitter44.png"/>
+                    <h2> @blue1647 </h2>
+                 </div>
+                </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="navbar-fixed-bottom">
+        <marquee scrollamount="25" class="hls">
+        </marquee>
+    </div>
+    &nbsp;
+
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <script src="js/ripples.min.js"></script>
+    <script src="js/material.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.material.init();
+        });
+
+    </script>
+</body>
+
+</html>
