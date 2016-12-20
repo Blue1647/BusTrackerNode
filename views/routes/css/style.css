@@ -1,0 +1,68 @@
+*{
+    color: white;
+}body{
+    background-color: #141414;
+}
+#time{
+    color: white;
+    font-size: 70px;
+}
+.panel-body{
+    font-size: 35px;
+}
+.panel-heading{
+    font-size: 40px;
+}
+.pl-panel > .panel-heading{
+    background-color: deeppink;
+    color: white;
+}
+.pl-panel > .panel-body{
+    background-color: hotpink;
+    color: white;
+}
+.west60-panel > .panel-heading{
+    background-color: #8E44AD;
+    color: white;
+}
+.west60-panel > .panel-body{
+    background-color: #9B59B6;
+    color: white;
+}
+.east60-panel > .panel-heading{
+    background-color: #2980B9;
+    color: white;
+}
+.east60-panel > .panel-body{
+    background-color: #3498DB;
+    color: white;
+}
+.west18-panel > .panel-heading{
+    background-color: #D35400;
+    color: white;
+}
+.west18-panel > .panel-body{
+    background-color: #E67E22;
+    color: white;
+}
+.east18-panel > .panel-heading{
+    background-color: #27AE60;
+    color: white;
+}
+.east18-panel > .panel-body{
+    background-color: #2ECC71;
+    color: white;
+}
+.wide{
+    width: 95%;
+}
+.panel-body{
+    background-color: #292939;
+    color: white;
+}
+.tempCond{
+    padding-left: 100px;
+}
+.day1-panel, .day2-panel, .day3-panel{
+    height: 450px;
+}
