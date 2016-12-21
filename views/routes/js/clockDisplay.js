@@ -4,7 +4,7 @@ $(document).ready(
     })
 
 function runFunction() {
-    var time = new Date().toString("dddd, MMMM d, yyyy h:mm:ss tt");
+    var time = moment(new Date).format("dddd, MMMM D, YYYY hh:mm:ss A");
     var timeField = document.getElementById('time');
     timeField.innerHTML = time;
 };

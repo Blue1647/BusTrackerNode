@@ -2,7 +2,6 @@
 <html>
 
 <head>
-    <meta http-equiv="refresh" content="600">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
@@ -31,11 +30,12 @@
                         </div>
                         <div class="panel-body errWest60">
                             Expected Bus Arrival Times:
-                            <div class="west60">
+                            <div id="west60">
                                 <% bus60West.forEach(function(eta){%>
                                     <ol><%
                                         if(eta.prdctdn != "DUE" || eta.length !=0){%>
                                         <%=moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")%>
+                                        <%setInterval(function(){moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")}, 60000)%>
                                         <%} else {%>
                                         <p>Sorry, no service is scheduled</p>
                                         <% } %>
@@ -51,11 +51,12 @@
                         </div>
                         <div class="panel-body errEast60">
                             Expected Bus Arrival Times:
-                            <div class="east60">
+                            <div id="east60">
                                 <% bus60East.forEach(function(eta){%>
                                     <ol><%
                                         if(eta.prdctdn != "DUE" || eta.length !=0){%>
                                         <%=moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")%>
+                                        <%setInterval(function(){moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")}, 60000)%>
                                         <%} else {%>
                                         <p>Sorry, no service is scheduled</p>
                                         <% } %>
@@ -71,11 +72,12 @@
                         </div>
                         <div class="panel-body errWest18">
                             Expected Bus Arrival Times:
-                            <div class="west18">
+                            <div id="west18">
                                 <% bus18West.forEach(function(eta){%>
                                     <ol><%
                                         if(eta.prdctdn != "DUE" || eta.length !=0){%>
                                         <%=moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")%>
+                                        <%setInterval(function(){moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")}, 60000)%>
                                         <%} else {%>
                                         <p>Sorry, no service is scheduled</p>
                                         <% } %>
@@ -95,11 +97,12 @@
                         </div>
                         <div class="panel-body errEast18">
                             Expected Bus Arrival Times:
-                            <div class="east18">
+                            <div id="east18">
                                 <% bus18East.forEach(function(eta){%>
                                     <ol><%
                                         if(eta.prdctdn != "DUE" || eta.length !=0){%>
                                         <%=moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")%>
+                                        <%setInterval(function(){moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")}, 60000)%>
                                         <%} else {%>
                                         <p>Sorry, no service is scheduled</p>
                                         <% } %>
@@ -114,8 +117,10 @@
                         <div class="panel-heading">Pink Line to <strong>54th</strong> and <strong>Cermak</strong></div>
                         <div class="panel-body errPl54">
                             Expected Train Arrival Times:
-                            <div class="Pl54"><% pl54Times.forEach(function(eta){%>
-                                    <ol><%=moment(eta.arrT).format("h:mm A")%></ol>
+                            <div id="Pl54"><% pl54Times.forEach(function(eta){%>
+                                    <ol><%=moment(eta.arrT).format("h:mm A")%>
+                                        <%setInterval(function(){moment(eta.arrT).format("h:mm A")}, 60000)%>
+                                        </ol>
                             <%});%>
                             </div>
                         </div>
@@ -126,13 +131,27 @@
                         <div class="panel-heading">Pink Line to <strong>Loop</strong></div>
                         <div class="panel-body errPlLoop">
                             Expected Train Arrival Times:
-                            <div class="PlLoop"><% plLoopTimes.forEach(function(eta){%>
-                                    <ol><%=moment(eta.arrT).format("h:mm A")%></ol>
+                            <div id="PlLoop"><% plLoopTimes.forEach(function(eta){%>
+                                    <ol><%=moment(eta.arrT).format("h:mm A")%>
+                                    <%setInterval(function(){moment(eta.arrT).format("h:mm A")}, 60000)%>
+                                    </ol>
                             <%});%></div>
                         </div>
                     </div>
                 </div>
-
+                <br>
+                <div class="col-md-4">
+                    <div class="panel panel-default uber-panel">
+                        <div class="panel-heading"><img src="img/uber.png" width="50" height="50"> Uber</div>
+                        <div class="panel-body errPlLoop">
+                            Expected Uber Arrival Times:
+                            <div id="uber">
+                                    <ol>uberPOOL: 5 mins away</ol>
+                                    <ol>uberX: 5 mins away</ol>
+                                    <ol>uberX: 15 mins away</ol>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -211,9 +230,11 @@
 
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
     <script src="js/ripples.min.js"></script>
     <script src="js/material.min.js"></script>
+    <script src="js/clockDisplay.js"></script>
+    <script src="js/transitUpdater.js"><script>
     <script>
         $(document).ready(function() {
             $.material.init();

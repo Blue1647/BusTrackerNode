@@ -14,6 +14,7 @@ var busTrackerBase = "http://ctabustracker.com/bustime/api/v2/getpredictions?key
 var Bus18URL = "&rt=18&stpid=6813,6765&top=5&format=json";
 var Bus60URL = "&rt=60&stpid=6375,6337&top=5&format=json";
 var wallpaperJSONURL = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US";
+var uberURL = "https://api.uber.com/v1/estimates/time?start_latitude=41.85841&start_longitude=-87.66033&server_token=9887VDxjbb26U2nMl9osSiKIGY48XGRQ2q_k6jBb";
 
 var plLoopTimes = []; //array for predicted arrival of Pink line Loop bound trains
 var pl54Times = []; //array for predicted arrival of Pink line 54th/cermak bound trains
@@ -21,11 +22,14 @@ var bus18East = []; //array for predicted arrival of 18th eastbound buses
 var bus18West = []; //array for predicted arrival of 18th westbound buses
 var bus60East = []; //array for predicted arrival of 60 eastbound buses
 var bus60West = []; //array for predicted arrival of 60 westbound buses
-var wallpaperURL;
+var ubers = []; //array for predicted arrival of Ubers
+var lyfts = []; //array for predicted arrival of Lyfts
+var wallpaperURL; // bing wallpaper of the day URL 
+var time = moment(new Date).format("dddd, MMMM D, YYYY hh:mm:ss A");
 
-getPLData();
-get18Data();
-get60Data();
+getTransitData();
+getUberData();
+setInterval(function () { getTransitData() }, 60000);
 getWallpaperOfTheDay();
 app.get('/', function (req, res) {
     res.render('routes/index', {
@@ -36,6 +40,7 @@ app.get('/', function (req, res) {
         bus60East: bus60East,
         bus60West: bus60West,
         wallpaperURL: wallpaperURL,
+        time: time,
         moment: moment
     })
 });
@@ -68,24 +73,24 @@ function getPLData() {
     });
 }
 
-function get18Data(){
+function get18Data() {
     var url = busTrackerBase + Bus18URL;
     request({
         url: url,
         json: true
-    }, function(err, res, body){
+    }, function (err, res, body) {
         if (err) throw err;
-        else if (!err && res.statusCode === 200){
+        else if (!err && res.statusCode === 200) {
             var ETAs = body['bustime-response'].prd;
-            if (bus18East.length != 0 && bus18West.length != 0){
+            if (bus18East.length != 0 && bus18West.length != 0) {
                 bus18East = [];
                 bus18West = [];
             }
-            ETAs.forEach(function(eta){
-                if(eta.rtdir === "Eastbound"){
+            ETAs.forEach(function (eta) {
+                if (eta.rtdir === "Eastbound") {
                     bus18East.push(eta);
                 }
-                else if(eta.rtdir === "Westbound"){
+                else if (eta.rtdir === "Westbound") {
                     bus18West.push(eta);
                 }
             });
@@ -93,46 +98,71 @@ function get18Data(){
     });
 }
 
-function get60Data(){
-var url = busTrackerBase + Bus60URL;
+function get60Data() {
+    var url = busTrackerBase + Bus60URL;
     request({
         url: url,
         json: true
-    }, function(err, res, body){
+    }, function (err, res, body) {
         if (err) throw err;
-        else if (!err && res.statusCode === 200){
+        else if (!err && res.statusCode === 200) {
             var ETAs = body['bustime-response'].prd;
-            if (bus60East.length != 0 && bus60West.length != 0){
+            if (bus60East.length != 0 && bus60West.length != 0) {
                 bus60East = [];
                 bus60West = [];
             }
-            ETAs.forEach(function(eta){
-                if(eta.rtdir === "Eastbound"){
+            ETAs.forEach(function (eta) {
+                if (eta.rtdir === "Eastbound") {
                     bus60East.push(eta);
                 }
-                else if(eta.rtdir === "Westbound"){
+                else if (eta.rtdir === "Westbound") {
                     bus60West.push(eta);
                 }
             });
         }
     });
 }
-function getWeatherData(){
+
+function getUberData() {
+    request({
+        url: uberURL,
+        json: true
+    }, function (err, res, body) {
+        if (err) throw err;
+        else if (!err && res.statusCode === 200) {
+            var uberArr = body.times;
+            if (ubers.length != 0) ubers = [];
+            uberArr.forEach(function (uber) {
+                if (uber.localized_display_name === "uberPOOL" || uber.localized_display_name === "uberX") {
+                    ubers.push(uber);
+                }
+            })
+        }
+    }
+    )
+}
+function getWeatherData() {
 
 }
-function getNewsData(){
+function getNewsData() {
 
 }
 
-function getWallpaperOfTheDay(){
+function getWallpaperOfTheDay() {
     request({
         url: wallpaperJSONURL,
         json: true
-    }, function(err, res, body){
+    }, function (err, res, body) {
         if (err) throw err;
-        else if(!err && res.statusCode === 200){
-            wallpaperURL = "http://bing.com/" +  body.images[0].url;
-            console.log(wallpaperURL);
+        else if (!err && res.statusCode === 200) {
+            wallpaperURL = "http://bing.com/" + body.images[0].url;
         }
     })
+}
+
+function getTransitData() {
+    console.log("getting transit data...");
+    get18Data();
+    get60Data();
+    getPLData();
 }
