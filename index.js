@@ -1,10 +1,12 @@
 var express = require('express');
+var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 var request = require('request');
 var moment = require('moment');
 
 
 
-var app = express();
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/views/routes/'));
 
@@ -45,7 +47,8 @@ app.get('/', function (req, res) {
     })
 });
 
-app.listen(8888);
+
+server.listen(8888);
 console.log("Running server on http://localhost:8888 ....");
 
 function getPLData() {
@@ -165,4 +168,7 @@ function getTransitData() {
     get18Data();
     get60Data();
     getPLData();
+    var test = "this is a test";
+    io.sockets.emit('pl54Times', pl54Times);
+    io.sockets.emit('plLoopTimes', plLoopTimes);
 }
