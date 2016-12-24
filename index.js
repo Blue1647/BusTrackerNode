@@ -85,18 +85,23 @@ function get18Data() {
         if (err) throw err;
         else if (!err && res.statusCode === 200) {
             var ETAs = body['bustime-response'].prd;
-            if (bus18East.length != 0 && bus18West.length != 0) {
-                bus18East = [];
-                bus18West = [];
+            if (ETAs != null) {
+                if (bus18East.length != 0 && bus18West.length != 0) {
+                    bus18East = [];
+                    bus18West = [];
+                }
+                ETAs.forEach(function (eta) {
+                    if (eta.rtdir === "Eastbound") {
+                        bus18East.push(eta);
+                    }
+                    else if (eta.rtdir === "Westbound") {
+                        bus18West.push(eta);
+                    }
+                });
             }
-            ETAs.forEach(function (eta) {
-                if (eta.rtdir === "Eastbound") {
-                    bus18East.push(eta);
-                }
-                else if (eta.rtdir === "Westbound") {
-                    bus18West.push(eta);
-                }
-            });
+            else {
+                
+            }
         }
     });
 }
@@ -110,19 +115,26 @@ function get60Data() {
         if (err) throw err;
         else if (!err && res.statusCode === 200) {
             var ETAs = body['bustime-response'].prd;
-            if (bus60East.length != 0 && bus60West.length != 0) {
-                bus60East = [];
-                bus60West = [];
+            if (ETAs != null) {
+                if (bus60East.length != 0 && bus60West.length != 0) {
+                    bus60East = [];
+                    bus60West = [];
+                }
+                ETAs.forEach(function (eta) {
+                    if (eta.rtdir === "Eastbound") {
+                        bus60East.push(eta);
+                    }
+                    else if (eta.rtdir === "Westbound") {
+                        bus60West.push(eta);
+                    }
+                });
             }
-            ETAs.forEach(function (eta) {
-                if (eta.rtdir === "Eastbound") {
-                    bus60East.push(eta);
-                }
-                else if (eta.rtdir === "Westbound") {
-                    bus60West.push(eta);
-                }
-            });
+            else {
+                bus60West.push("Sorry, no service is scheduled!");
+                bus60East.push("Sorry, no service is scheduled!");
+            }
         }
+
     });
 }
 
