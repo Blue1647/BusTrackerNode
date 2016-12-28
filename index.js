@@ -17,6 +17,9 @@ var Bus18URL = "&rt=18&stpid=6813,6765&top=5&format=json";
 var Bus60URL = "&rt=60&stpid=6375,6337&top=5&format=json";
 var wallpaperJSONURL = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US";
 var uberURL = "https://api.uber.com/v1/estimates/time?start_latitude=41.85841&start_longitude=-87.66033&server_token=9887VDxjbb26U2nMl9osSiKIGY48XGRQ2q_k6jBb";
+var weatherAPIKey = "12d2e28ea368c6f7"
+var currWeatherURL = "http://api.wunderground.com/api/" + weatherAPIKey + "/conditions/q/IL/Chicago.json"
+var futureWeatherURL = "http://api.wunderground.com/api/" + weatherAPIKey + "/forecast/q/IL/Chicago.json"
 
 var plLoopTimes = []; //array for predicted arrival of Pink line Loop bound trains
 var pl54Times = []; //array for predicted arrival of Pink line 54th/cermak bound trains
@@ -26,6 +29,8 @@ var bus60East = []; //array for predicted arrival of 60 eastbound buses
 var bus60West = []; //array for predicted arrival of 60 westbound buses
 var ubers = []; //array for predicted arrival of Ubers
 var lyfts = []; //array for predicted arrival of Lyfts
+var currWeather = []; //array for current weather conditions
+var futureWeather = []; //array for future weather conditions
 var wallpaperURL; // bing wallpaper of the day URL 
 var time = moment(new Date).format("dddd, MMMM D, YYYY hh:mm:ss A");
 
@@ -43,7 +48,8 @@ app.get('/', function (req, res) {
         bus60West: bus60West,
         wallpaperURL: wallpaperURL,
         time: time,
-        moment: moment
+        moment: moment,
+        ubers: ubers
     })
 });
 
@@ -157,6 +163,28 @@ function getUberData() {
     )
 }
 function getWeatherData() {
+    request({
+        url: currWeatherURL,
+        json: true
+    }, function (err, res, body){
+        if (err) throw err;
+        else if(!err && res.statusCode === 200){
+            currWeather = body.current_observation;
+        }
+    });
+    request({
+        url: futureWeatherURL,
+        json: true
+    }, function(err, res, body){
+        if(err) throw err;
+        else if(!err && res.statusCode === 200){
+            for(var i = 1; i<4; i++){
+                futureWeather.push(i);
+            }
+        }
+
+    }
+    )
 
 }
 function getNewsData() {
@@ -176,11 +204,25 @@ function getWallpaperOfTheDay() {
 }
 
 function getTransitData() {
+    /*
+     plLoopTimes: plLoopTimes,
+    pl54Times: pl54Times,
+        bus18East: bus18East,
+        bus18West: bus18West,
+        bus60East: bus60East,
+        bus60West: bus60West,
+    */
     console.log("getting transit data...");
     get18Data();
     get60Data();
     getPLData();
+    getUberData();
     var test = "this is a test";
     io.sockets.emit('pl54Times', pl54Times);
     io.sockets.emit('plLoopTimes', plLoopTimes);
+    io.sockets.emit('bus18East', bus18East);
+    io.sockets.emit('bus18West', bus18West);
+    io.sockets.emit('bus60East', bus60East);
+    io.sockets.emit('bus60West', bus60West);
+    io.sockets.emit('ubers', ubers);
 }

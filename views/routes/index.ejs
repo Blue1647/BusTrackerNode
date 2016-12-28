@@ -9,7 +9,6 @@
     <link href="css/material.min.css" rel="stylesheet">
     <link href="css/ripples.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <% include ./js/timeUtil%>
     <title>Bus/Train Tracker</title>
 </head>
 
@@ -35,7 +34,6 @@
                                     <ol><%
                                         if(eta.prdctdn != "DUE" || eta.length !=0){%>
                                         <%=moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")%>
-                                        <%setInterval(function(){moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")}, 60000)%>
                                         <%} else {%>
                                         <p>Sorry, no service is scheduled</p>
                                         <% } %>
@@ -146,9 +144,9 @@
                         <div class="panel-body errPlLoop">
                             Expected Uber Arrival Times:
                             <div id="uber">
-                                    <ol>uberPOOL: 5 mins away</ol>
-                                    <ol>uberX: 5 mins away</ol>
-                                    <ol>uberX: 15 mins away</ol>
+                                 <%ubers.forEach(function (uber) {%>
+                                    <ol><%=uber.localized_display_name%>: <%=Math.floor((uber.estimate)/60)%> mins away </ol>
+                                <%});%>
                         </div>
                     </div>
                 </div>
