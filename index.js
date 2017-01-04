@@ -36,6 +36,7 @@ var time = moment(new Date).format("dddd, MMMM D, YYYY hh:mm:ss A");
 
 getTransitData();
 getUberData();
+getWeatherData();
 setInterval(function () { getTransitData() }, 60000);
 getWallpaperOfTheDay();
 app.get('/', function (req, res) {
@@ -106,7 +107,7 @@ function get18Data() {
                 });
             }
             else {
-                
+
             }
         }
     });
@@ -166,20 +167,20 @@ function getWeatherData() {
     request({
         url: currWeatherURL,
         json: true
-    }, function (err, res, body){
+    }, function (err, res, body) {
         if (err) throw err;
-        else if(!err && res.statusCode === 200){
+        else if (!err && res.statusCode === 200) {
             currWeather = body.current_observation;
         }
     });
     request({
         url: futureWeatherURL,
         json: true
-    }, function(err, res, body){
-        if(err) throw err;
-        else if(!err && res.statusCode === 200){
-            for(var i = 1; i<4; i++){
-                futureWeather.push(i);
+    }, function (err, res, body) {
+        if (err) throw err;
+        else if (!err && res.statusCode === 200) {
+            for (var i = 1; i < 4; i++) {
+                futureWeather.push(body.forecast.simpleforecast.forecastday[i]);
             }
         }
 
@@ -225,4 +226,6 @@ function getTransitData() {
     io.sockets.emit('bus60East', bus60East);
     io.sockets.emit('bus60West', bus60West);
     io.sockets.emit('ubers', ubers);
+    io.sockets.emit('currWeather', currWeather);
+    io.sockets.emit('futureWeather', futureWeather);
 }
