@@ -10,14 +10,6 @@ jQuery(function ($) {
     var day1 = document.getElementById
     var socket = io.connect();
     console.log("Updating data...");
-    /*
-         plLoopTimes: plLoopTimes,
-        pl54Times: pl54Times,
-        bus18East: bus18East,
-        bus18West: bus18West,
-        bus60East: bus60East,
-        bus60West: bus60West,
-    */
     socket.on('plLoopTimes', function (data) {
         plLoopTimes.innerHTML = "";
         data.forEach(function (transitObj) {
@@ -66,14 +58,25 @@ jQuery(function ($) {
         var currFeelsLikeTemp = Math.round(data.feelslike_f);
         var currCondStr = data.weather;
         var colors = getColorForTemp(currTemp);
-        console.log(colors);
         currCond.innerHTML = "Current temperature: " + currTemp + "&deg;F<br>" + "Feels like: " + currFeelsLikeTemp + "&deg;F<br>" + "Current conditions: " + currCondStr;
         document.getElementById("condIco").src = getIconForCond(currCondStr);
-        document.getElementById("curr-heading").backgroundColor = colors.head;
-        document.getElementById("curr-body").backgroundColor=colors.body;
+        document.getElementById("curr-heading").style.backgroundColor = colors.head;
+        document.getElementById("curr-body").style.backgroundColor = colors.body;
     });
     socket.on('futureWeather', function (data) {
-        // ubers.innerHTML = "";
+        for(i = 0; i < data.length; i++){
+            console.log(data[i].date.weekday);
+        }
+        data.forEach(function(futureDay){
+            var dateDay = data[i].date.weekday;
+            var highTemp = data[i].high.fahrenheit;
+            var lowTemp = data[i].low.fahrenheit;
+            var cond = data[i].conditions;
+            var colors = getColorForTemp(highTemp);
+            var dayIco = getIconForCond(cond);
+
+            document.getElementById("day" + i + "-heading").innerHTML = dateDay;
+        })
     });
 });
 

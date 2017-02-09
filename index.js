@@ -37,6 +37,7 @@ var time = moment(new Date).format("dddd, MMMM D, YYYY hh:mm:ss A");
 getTransitData();
 getUberData();
 getWeatherData();
+setInterval(function() {sendAllData()}, 1000);
 setInterval(function () { getTransitData() }, 60000);
 getWallpaperOfTheDay();
 app.get('/', function (req, res) {
@@ -205,20 +206,13 @@ function getWallpaperOfTheDay() {
 }
 
 function getTransitData() {
-    /*
-     plLoopTimes: plLoopTimes,
-    pl54Times: pl54Times,
-        bus18East: bus18East,
-        bus18West: bus18West,
-        bus60East: bus60East,
-        bus60West: bus60West,
-    */
     console.log("getting transit data...");
     get18Data();
     get60Data();
     getPLData();
-    getUberData();
-    var test = "this is a test";
+    getUberData();    
+}
+function sendAllData() {
     io.sockets.emit('pl54Times', pl54Times);
     io.sockets.emit('plLoopTimes', plLoopTimes);
     io.sockets.emit('bus18East', bus18East);
