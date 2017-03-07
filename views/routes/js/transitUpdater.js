@@ -64,19 +64,20 @@ jQuery(function ($) {
         document.getElementById("curr-body").style.backgroundColor = colors.body;
     });
     socket.on('futureWeather', function (data) {
-        for(i = 0; i < data.length; i++){
-            console.log(data[i].date.weekday);
-        }
-        data.forEach(function(futureDay){
-            var dateDay = data[i].date.weekday;
-            var highTemp = data[i].high.fahrenheit;
-            var lowTemp = data[i].low.fahrenheit;
-            var cond = data[i].conditions;
+        data.forEach(function(data, i){
+            var dateDay = data.date.weekday;
+            var highTemp = data.high.fahrenheit;
+            var lowTemp = data.low.fahrenheit;
+            var cond = data.conditions;
             var colors = getColorForTemp(highTemp);
             var dayIco = getIconForCond(cond);
-
             document.getElementById("day" + i + "-heading").innerHTML = dateDay;
-        })
+            document.getElementById("day" + i + "-heading").style.color = "white";
+            document.getElementById("day" + i + "-heading").style.backgroundColor = colors.head;
+            document.getElementById("day" + i + "-panel").style.backgroundColor = colors.body;
+            document.getElementById("day" + i + "-panel").innerHTML = highTemp + "&deg;F\/" + lowTemp + "&deg;F <br>" + cond + "<br> <img src=\"" + dayIco + "\"\/>"
+
+        });
     });
 });
 
@@ -177,77 +178,78 @@ function getIconForCond(cond) {
     }
 }
 function getColorForTemp(temp) {
-    if (temp > -20 && temp < -10) {
+    if (temp > -20 && temp <= -10) {
         var head = '#002C5A'; //header color
         var body = '#195CA2'; //body color
         return {
             head: head,
             body: body
         };
-    } else if (temp > -9 && temp < 0) {
+    } else if (temp > -9 && temp <= 0) {
         var head = '#002C5A'; //header color
         var body = '#195CA2'; //body color
         return {
             head: head,
             body: body
         };
-    } else if (temp > 1 && temp < 10) {
+    } else if (temp > 1 && temp <= 10) {
         var head = '#002C5A'; //header color
         var body = '#195CA2'; //body color
         return {
             head: head,
             body: body
         };
-    } else if (temp > 11 && temp < 20) {
+    } else if (temp > 11 && temp <= 20) {
         var head = '#002C5A'; //header color
         var body = '#195CA2'; //body color
         return {
             head: head,
             body: body
         };
-    } else if (temp > 21 && temp < 30) {
+    } else if (temp > 21 && temp <= 30) {
         var head = '#002C5A'; //header color
         var body = '#195CA2'; //body color
         return {
             head: head,
             body: body
         };
-    } else if (temp > 31 && temp < 40) {
-        var head = '#365902'; //header color
-        var body = '#C6D93B'; //body color
+    } else if (temp > 31 && temp <= 40) {
+        var head = '#27AE60'; //header color
+        var body = '#2ECC71'; //body color
         return {
             head: head,
             body: body
         };
-    } else if (temp > 41 && temp < 50) {
-        var head = '#365902'; //header color
-        var body = '#C6D93B'; //body color
+    } else if (temp > 41 && temp <= 50) {
+        var head = '#27AE60'; //header color
+        var body = '#2ECC71'; //body color
         return {
             head: head,
             body: body
         };
-    } else if (temp > 51 && temp < 60) {
-        var head = '#365902'; //header color
-        var body = '#C6D93B'; //body color
+    } else if (temp > 51 && temp <= 60) {
+        var head = '#27AE60'; //header color
+        var body = '#2ECC71'; //body color
+    
         return {
             head: head,
             body: body
         };
-    } else if (temp > 61 && temp < 70) {
+    } else if (temp > 61 && temp <= 70) {
         var head = '#FFBC00'; //header color
         var body = '#FF9B00'; //body color
         return {
             head: head,
             body: body
         };
-    } else if (temp > 71 && temp < 80) {
-        var head = '#FF9B00'; //header color
-        var body = '#FFBC00'; //body color
+    } else if (temp > 71 && temp <= 80) {
+        var head = '#FFBC00'; //header color
+        var body = '#FF9B00'; //body color
         return {
             head: head,
             body: body
         };
-    } else if (temp > 81 && temp < 90) {
+    } else if (temp > 81 && temp <= 90) {
         var head = '#FF4C0C'; //header color
         var body = '#FF7300'; //body color
         return {
@@ -257,6 +259,13 @@ function getColorForTemp(temp) {
     } else if (temp >= 91) {
         var head = '#FF4C0C'; //header color
         var body = '#FF7300'; //body color
+        return {
+            head: head,
+            body: body
+        };
+    } else {
+        var head = '#FFBC00'; //header color
+        var body = '#FF9B00'; //body color
         return {
             head: head,
             body: body
