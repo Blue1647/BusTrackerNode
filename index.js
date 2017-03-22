@@ -17,6 +17,11 @@ var Bus18URL = "&rt=18&stpid=6813,6765&top=5&format=json";
 var Bus60URL = "&rt=60&stpid=6375,6337&top=5&format=json";
 var wallpaperJSONURL = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US";
 var uberURL = "https://api.uber.com/v1/estimates/time?start_latitude=41.85841&start_longitude=-87.66033&server_token=9887VDxjbb26U2nMl9osSiKIGY48XGRQ2q_k6jBb";
+var lyftTokenRequestURL = "https://api.lyft.com/oauth/token";
+var lyftEtaURL = "https://api.lyft.com/v1/eta?lat=41.85841&lng=-87.66033"
+var lyftClientId = "rdju0U0Gsr6c";
+var lyftClientSecret = "7BAXf3njLApyIJcg7dkADCtfVg4EIwKB";
+var lyftAccessToken;
 var weatherAPIKey = "12d2e28ea368c6f7"
 var currWeatherURL = "http://api.wunderground.com/api/" + weatherAPIKey + "/conditions/q/IL/Chicago.json"
 var futureWeatherURL = "http://api.wunderground.com/api/" + weatherAPIKey + "/forecast/q/IL/Chicago.json"
@@ -34,11 +39,18 @@ var futureWeather = []; //array for future weather conditions
 var wallpaperURL; // bing wallpaper of the day URL 
 var time = moment(new Date).format("dddd, MMMM D, YYYY hh:mm:ss A");
 
+
 getTransitData();
 getUberData();
 getWeatherData();
-setInterval(function() {sendAllData()}, 1000);
-setInterval(function () { getTransitData() }, 60000);
+getLyftToken();
+getLyftData();
+setInterval(function () {
+    sendAllData()
+}, 1000);
+setInterval(function () {
+    getTransitData()
+}, 60000);
 getWallpaperOfTheDay();
 app.get('/', function (req, res) {
     res.render('routes/index', {
@@ -75,8 +87,7 @@ function getPLData() {
 
                 if (eta.destNm === "Loop") {
                     plLoopTimes.push(eta);
-                }
-                else {
+                } else {
                     pl54Times.push(eta);
                 }
             });
@@ -101,13 +112,11 @@ function get18Data() {
                 ETAs.forEach(function (eta) {
                     if (eta.rtdir === "Eastbound") {
                         bus18East.push(eta);
-                    }
-                    else if (eta.rtdir === "Westbound") {
+                    } else if (eta.rtdir === "Westbound") {
                         bus18West.push(eta);
                     }
                 });
-            }
-            else {
+            } else {
 
             }
         }
@@ -131,13 +140,11 @@ function get60Data() {
                 ETAs.forEach(function (eta) {
                     if (eta.rtdir === "Eastbound") {
                         bus60East.push(eta);
-                    }
-                    else if (eta.rtdir === "Westbound") {
+                    } else if (eta.rtdir === "Westbound") {
                         bus60West.push(eta);
                     }
                 });
-            }
-            else {
+            } else {
                 bus60West.push("Sorry, no service is scheduled!");
                 bus60East.push("Sorry, no service is scheduled!");
             }
@@ -161,9 +168,69 @@ function getUberData() {
                 }
             })
         }
-    }
-    )
+    })
 }
+
+function getLyftToken() {
+    console.log("getting lyft token...");
+    var headers = {
+        'Content-Type': 'application/json'
+    };
+
+    var dataString = '{"grant_type": "client_credentials", "scope": "public"}';
+
+    var options = {
+        url: lyftTokenRequestURL,
+        method: 'POST',
+        headers: headers,
+        body: dataString,
+        jsonp: true,
+        auth: {
+            'user': lyftClientId,
+            'pass': lyftClientSecret
+        }
+    };
+
+    function callback(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var json = JSON.parse(response.body);
+            lyftAccessToken = json.access_token;
+        } else if (error) {
+            
+            console.log(error);
+        }
+    }
+    request(options, callback);
+    
+}
+
+function getLyftEtaData() {
+    if (lyftAccessToken == null){
+        setTimeout(getLyftData, 50);
+    }
+    var headers = {
+        'Authorization': 'Bearer ' + lyftAccessToken
+    };
+
+    var options = {
+        url: lyftEtaURL,
+        headers: headers
+    };
+    function callback(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var json = JSON.parse(response.body);
+            lyfts = json.eta_estimates;
+        }
+        
+        else if (response.statusCode == 401){
+            //if access_token has expired (access_token has lifespan of 24 hrs)
+            getLyftToken();
+        }
+    }
+    request(options, callback);
+
+}
+
 function getWeatherData() {
     request({
         url: currWeatherURL,
@@ -185,10 +252,10 @@ function getWeatherData() {
             }
         }
 
-    }
-    )
+    })
 
 }
+
 function getNewsData() {
 
 }
@@ -210,8 +277,9 @@ function getTransitData() {
     get18Data();
     get60Data();
     getPLData();
-    getUberData();    
+    getUberData();
 }
+
 function sendAllData() {
     io.sockets.emit('pl54Times', pl54Times);
     io.sockets.emit('plLoopTimes', plLoopTimes);
