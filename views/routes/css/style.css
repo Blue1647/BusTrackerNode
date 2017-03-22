@@ -73,73 +73,11 @@
     background-color: white;
     color: black;
 }
-
-
-/*
-*{
+.lyft-panel > .panel-heading{
+    background-color: #333447;
     color: white;
 }
-
-#time{
-    color: white;
-    font-size: 70px;
-}
-.panel-body{
-    font-size: 35px;
-}
-.panel-heading{
-    font-size: 40px;
-}
-.pl-panel > .panel-heading{
-    background-color: rgba(255,20,147, 0.5);
+.lyft-panel > .panel-body{
+    background-color: hotpink;
     color: white;
 }
-.pl-panel > .panel-body{
-    background-color: rgba(255, 105, 180, 0.5);
-    color: white;
-}
-.west60-panel > .panel-heading{
-    background-color: rgba(142,68,173, .5);
-    color: white;
-}
-.west60-panel > .panel-body{
-    background-color: rgba(155,89,182,.5);
-    color: white;
-}
-.east60-panel > .panel-heading{
-    background-color: rgba(41,128,185,.5);
-    color: white;
-}
-.east60-panel > .panel-body{
-    background-color: rgba(52,152,219,.5);
-    color: white;
-}
-.west18-panel > .panel-heading{
-    background-color: rgba(211,84,0,.5);
-    color: white;
-}
-.west18-panel > .panel-body{
-    background-color: rgba(230,126,34,.5);
-    color: white;
-}
-.east18-panel > .panel-heading{
-    background-color: rgba(39,174,96,.5);
-    color: white;
-}
-.east18-panel > .panel-body{
-    background: rgba(46,204,113,.5);
-    color: white;
-}
-.wide{
-    width: 95%;
-}
-.panel-body{
-    background-color: #292939;
-    color: white;
-}
-.tempCond{
-    padding-left: 100px;
-}
-.day1-panel, .day2-panel, .day3-panel{
-    height: 450px;
-}*/

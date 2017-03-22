@@ -43,14 +43,13 @@ var time = moment(new Date).format("dddd, MMMM D, YYYY hh:mm:ss A");
 getTransitData();
 getUberData();
 getWeatherData();
-getLyftToken();
 getLyftData();
-setInterval(function () {
-    sendAllData()
-}, 1000);
 setInterval(function () {
     getTransitData()
 }, 60000);
+setInterval(function () {
+    sendAllData()
+}, 1000);
 getWallpaperOfTheDay();
 app.get('/', function (req, res) {
     res.render('routes/index', {
@@ -171,7 +170,7 @@ function getUberData() {
     })
 }
 
-function getLyftToken() {
+function getLyftData() {
     console.log("getting lyft token...");
     var headers = {
         'Content-Type': 'application/json'
@@ -195,6 +194,7 @@ function getLyftToken() {
         if (!error && response.statusCode == 200) {
             var json = JSON.parse(response.body);
             lyftAccessToken = json.access_token;
+            getLyftEtaData();
         } else if (error) {
             
             console.log(error);
@@ -224,7 +224,7 @@ function getLyftEtaData() {
         
         else if (response.statusCode == 401){
             //if access_token has expired (access_token has lifespan of 24 hrs)
-            getLyftToken();
+            getLyftData();
         }
     }
     request(options, callback);
@@ -278,6 +278,7 @@ function getTransitData() {
     get60Data();
     getPLData();
     getUberData();
+    getLyftEtaData();
 }
 
 function sendAllData() {
@@ -288,6 +289,8 @@ function sendAllData() {
     io.sockets.emit('bus60East', bus60East);
     io.sockets.emit('bus60West', bus60West);
     io.sockets.emit('ubers', ubers);
+    io.sockets.emit('lyfts', lyfts);
     io.sockets.emit('currWeather', currWeather);
     io.sockets.emit('futureWeather', futureWeather);
+    
 }

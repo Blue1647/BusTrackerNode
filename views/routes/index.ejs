@@ -20,7 +20,7 @@
         <!--Curr time-->
         <h1 class="text-center" id="time"></h1>
         <!-- Bus Tracker -->
-        <div class="busPanels">
+        <div class="busPanel">
             <!--60 bus-->
             <div class="row">
                 <div class="col-md-4">
@@ -31,14 +31,15 @@
                             Expected Bus Arrival Times:
                             <div id="west60">
                                 <% bus60West.forEach(function(eta){%>
-                                    <ol><%
+                                    <ol>
+                                        <%
                                         if(eta.prdctdn != "DUE" || eta.length !=0){%>
-                                        <%=moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")%>
-                                        <%} else {%>
-                                        <p>Sorry, no service is scheduled</p>
-                                        <% } %>
+                                            <%=moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")%>
+                                                <%} else {%>
+                                                    <p>Sorry, no service is scheduled</p>
+                                                    <% } %>
                                     </ol>
-                                <%});%>
+                                    <%});%>
                             </div>
                         </div>
                     </div>
@@ -51,16 +52,17 @@
                             Expected Bus Arrival Times:
                             <div id="east60">
                                 <% bus60East.forEach(function(eta){%>
-                                    <ol><%
+                                    <ol>
+                                        <%
                                         if(eta.prdctdn != "DUE" || eta.length !=0){%>
-                                        <%=moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")%>
-                                        <%setInterval(function(){moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")}, 60000)%>
-                                        <%} else {%>
-                                        <%="Sorry, no service is scheduled"%>
-                                        <% } %>
+                                            <%=moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")%>
+                                                <%setInterval(function(){moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")}, 60000)%>
+                                                    <%} else {%>
+                                                        <%="Sorry, no service is scheduled"%>
+                                                            <% } %>
                                     </ol>
-                                <%});%>
-                                </div>
+                                    <%});%>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -72,16 +74,17 @@
                             Expected Bus Arrival Times:
                             <div id="west18">
                                 <% bus18West.forEach(function(eta){%>
-                                    <ol><%
+                                    <ol>
+                                        <%
                                         if(eta.prdctdn != "DUE" || eta.length !=0){%>
-                                        <%=moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")%>
-                                        <%setInterval(function(){moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")}, 60000)%>
-                                        <%} else {%>
-                                        <%="Sorry, no service is scheduled"%>
-                                        <% } %>
+                                            <%=moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")%>
+                                                <%setInterval(function(){moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")}, 60000)%>
+                                                    <%} else {%>
+                                                        <%="Sorry, no service is scheduled"%>
+                                                            <% } %>
                                     </ol>
-                                <%});%>
-                                </div>
+                                    <%});%>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -97,16 +100,17 @@
                             Expected Bus Arrival Times:
                             <div id="east18">
                                 <% bus18East.forEach(function(eta){%>
-                                    <ol><%
+                                    <ol>
+                                        <%
                                         if(eta.prdctdn != "DUE" || eta.length !=0){%>
-                                        <%=moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")%>
-                                        <%setInterval(function(){moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")}, 60000)%>
-                                        <%} else {%>
-                                        <%="Sorry, no service is scheduled"%>
-                                        <% } %>
+                                            <%=moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")%>
+                                                <%setInterval(function(){moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")}, 60000)%>
+                                                    <%} else {%>
+                                                        <%="Sorry, no service is scheduled"%>
+                                                            <% } %>
                                     </ol>
-                                <%});%>
-                                </div>
+                                    <%});%>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -115,11 +119,13 @@
                         <div class="panel-heading">Pink Line to <strong>54th</strong> and <strong>Cermak</strong></div>
                         <div class="panel-body errPl54">
                             Expected Train Arrival Times:
-                            <div id="Pl54"><% pl54Times.forEach(function(eta){%>
-                                    <ol><%=moment(eta.arrT).format("h:mm A")%>
-                                        <%setInterval(function(){moment(eta.arrT).format("h:mm A")}, 60000)%>
-                                        </ol>
-                            <%});%>
+                            <div id="Pl54">
+                                <% pl54Times.forEach(function(eta){%>
+                                    <ol>
+                                        <%=moment(eta.arrT).format("h:mm A")%>
+                                            <%setInterval(function(){moment(eta.arrT).format("h:mm A")}, 60000)%>
+                                    </ol>
+                                    <%});%>
                             </div>
                         </div>
                     </div>
@@ -129,117 +135,145 @@
                         <div class="panel-heading">Pink Line to <strong>Loop</strong></div>
                         <div class="panel-body errPlLoop">
                             Expected Train Arrival Times:
-                            <div id="PlLoop"><% plLoopTimes.forEach(function(eta){%>
-                                    <ol><%=moment(eta.arrT).format("h:mm A")%>
-                                    <%setInterval(function(){moment(eta.arrT).format("h:mm A")}, 60000)%>
+                            <div id="PlLoop">
+                                <% plLoopTimes.forEach(function(eta){%>
+                                    <ol>
+                                        <%=moment(eta.arrT).format("h:mm A")%>
+                                            <%setInterval(function(){moment(eta.arrT).format("h:mm A")}, 60000)%>
                                     </ol>
-                            <%});%></div>
+                                    <%});%>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
                 <br>
-                <div class="col-md-4">
-                    <div class="panel panel-default uber-panel">
-                        <div class="panel-heading"><img src="img/uber.png" width="50" height="50"> Uber</div>
-                        <div class="panel-body errPlLoop">
-                            Expected Uber Arrival Times:
-                            <div id="uber">
-                                 <%ubers.forEach(function (uber) {%>
-                                    <ol><%=uber.localized_display_name%>: <%=Math.floor((uber.estimate)/60)%> mins away </ol>
-                                <%});%>
+
+
+
+
+                <div class="ridesharingPanel">
+                    <div class="col-md-4">
+                        <div class="panel panel-default uber-panel">
+                            <div class="panel-heading"><img src="img/uber.png" width="50" height="50"> Uber</div>
+                            <div class="panel-body errPlLoop">
+                                Expected Uber Arrival Times:
+                                <div id="uber">
+                                    <%ubers.forEach(function (uber) {%>
+                                        <ol>
+                                            <%=uber.localized_display_name%>:
+                                                <%=Math.floor((uber.estimate)/60)%> mins away </ol>
+                                        <%});%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel panel-default lyft-panel">
+                            <div class="panel-heading"><img src="img/lyft.png" width="150" height="50"> Lyft</div>
+                            <div class="panel-body errPlLoop">
+                                Expected Lyft Arrival Times:
+                                <div id="lyft">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Weather Panel-->
+            <div class="weatherPanel">
+                <div class="row">
+                    <div class="panel panel-default weather-panel">
+                        <div class="panel-heading curr-heading" id="curr-heading"></div>
+                        <div class="panel-body curr-body" id="curr-body">
+                            <div class="row">
+                                <div class="col-md-2"><img id="condIco" src="" /></div>
+                                <div class="temp cond col-md-10 tempCond" id="curr-cond"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="day0 panel panel-default" id="day0">
+                            <div class="panel-heading day0-heading" id="day0-heading">Tomorrow</div>
+                            <div class="panel-body day0-panel text-center" id="day0-panel">
+                                <img id="day0-ico" src="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="day1 panel panel-default" id="day1">
+                            <div class="panel-heading day1-heading" id="day1-heading">Next Day</div>
+                            <div class="panel-body day1-panel text-center" id="day1-panel">
+                                <img id="day1-ico" src="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="day2 panel panel-default" id="day2">
+                            <div class="panel-heading day2-heading" id="day2-heading">Next Next Day</div>
+                            <div class="panel-body day2-panel text-center" id="day2-panel">
+                                <img id="day2-ico" src="" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Weather Panel-->
-        <div class="weatherPanels">
-            <div class="row">
-                <div class="panel panel-default weather-panel">
-                    <div class="panel-heading curr-heading" id="curr-heading"></div>
-                    <div class="panel-body curr-body" id="curr-body">
-                        <div class="row">
-                            <div class="col-md-2"><img id="condIco" src="" /></div>
-                            <div class="temp cond col-md-10 tempCond" id="curr-cond"></div>
+            <!-- Social Panel -->
+            <div class="socialPanel">
+                <div class="row text-center">
+                    <h1> Follow Us! </h1>
+                    <div class="row ">
+                        <div class="col-md-4">
+                            <!-- facebook -->
+                            <div class="col-padding">
+                                <img src="img/socialIcons/facebook44.png" />
+                                <h2>facebook.com/blue1647</h2>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="day0 panel panel-default" id="day0">
-                        <div class="panel-heading day0-heading" id="day0-heading">Tomorrow</div>
-                        <div class="panel-body day0-panel text-center" id="day0-panel">
-                            <img id="day0-ico" src="" />
+                        <div class="col-md-4">
+                            <!-- instagram -->
+                            <div class="col-padding">
+                                <img src="img/socialIcons/instagram10.png" />
+                                <h2> @blue1647chicago</h2>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="day1 panel panel-default" id="day1">
-                        <div class="panel-heading day1-heading" id="day1-heading">Next Day</div>
-                        <div class="panel-body day1-panel text-center" id="day1-panel">
-                            <img id="day1-ico" src="" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="day2 panel panel-default" id="day2">
-                        <div class="panel-heading day2-heading" id="day2-heading">Next Next Day</div>
-                        <div class="panel-body day2-panel text-center" id="day2-panel">
-                            <img id="day2-ico" src="" />
+                        <div class="col-md-4">
+                            <!-- twitter -->
+                            <div class="col-padding">
+                                <img src="img/socialIcons/twitter44.png" />
+                                <h2> @blue1647 </h2>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
-    <!-- Social Panel -->
-        <div class="socialPanels">
-          <div class="row text-center">
-          <h1> Follow Us! </h1>
-          <div class="row ">
-                <div class="col-md-4"><!-- facebook -->
-                  <div class="col-padding">
-                    <img src="img/socialIcons/facebook44.png" />
-                    <h2>facebook.com/blue1647</h2>
-                  </div>
-                </div>
-                <div class="col-md-4"><!-- instagram -->
-                  <div class="col-padding">
-                    <img src="img/socialIcons/instagram10.png"/>
-                    <h2> @blue1647chicago</h2>
-                 </div>
-                </div>
-                <div class="col-md-4"><!-- twitter -->
-                  <div class="col-padding">
-                    <img src="img/socialIcons/twitter44.png"/>
-                    <h2> @blue1647 </h2>
-                 </div>
-                </div>
-          </div>
+        <div class="navbar-fixed-bottom">
+            <marquee scrollamount="25" class="hls">
+            </marquee>
         </div>
-      </div>
+        &nbsp;
 
-
-    </div>
-    <div class="navbar-fixed-bottom">
-        <marquee scrollamount="25" class="hls">
-        </marquee>
-    </div>
-    &nbsp;
-
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
-    <script src="js/ripples.min.js"></script>
-    <script src="js/material.min.js"></script>
-    <script src="js/clockDisplay.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="js/transitUpdater.js"><script>
-    <script>
-        $(document).ready(function() {
-            $.material.init();
-        });
-
-    </script>
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+        <script src="js/ripples.min.js"></script>
+        <script src="js/material.min.js"></script>
+        <script src="js/clockDisplay.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="js/transitUpdater.js"></script>
+        <script src="js/main.js"></script>
+        
+            <script>
+                <script>
+                $(document).ready(function () {
+                    $.material.init();
+                });
+        </script>
 </body>
 
 </html>

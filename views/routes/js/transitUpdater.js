@@ -6,8 +6,8 @@ jQuery(function ($) {
     var bus60East = document.getElementById("east60"); //class for predicted arrival of 60 eastbound buses
     var bus60West = document.getElementById("west60"); //class for predicted arrival of 60 westbound buses
     var ubers = document.getElementById("uber"); //class for predicted arrival of ubers
+    var lyfts = document.getElementById("lyft"); //class for predicted arrival of lyfts
     var currCond = document.getElementById("curr-cond");//class for current conditions
-    var day1 = document.getElementById
     var socket = io.connect();
     console.log("Updating data...");
     socket.on('plLoopTimes', function (data) {
@@ -52,6 +52,13 @@ jQuery(function ($) {
             ubers.innerHTML += "<ol>" + uber.localized_display_name + ": " + Math.floor((uber.estimate) / 60) + " mins away</ol>";
         });
     });
+    socket.on('lyfts', function (data) {
+        lyfts.innerHTML = "";
+        data.forEach(function (lyft) {
+            lyfts.innerHTML += "<ol>" + lyft.display_name + ": " + Math.floor((lyft.eta_seconds) / 60) + " mins away</ol>";
+        });
+    });
+    
     socket.on('currWeather', function (data) {
         currCond.innerHTML = "";
         var currTemp = Math.round(data.temp_f);

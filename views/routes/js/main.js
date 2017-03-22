@@ -1,36 +1,61 @@
 $(document).ready(
     function () {
-        $(".weatherPanels").hide();
-        $(".busPanels").hide();
+        hideAllPanels();
         loadPanels();
         setInterval("loadPanels()", 30000);
     }
 )
 
-function loadBusPanels() {
-    $(".busPanels").fadeIn("slow");
+function loadBusPanel() {
+    $(".busPanel").fadeIn("slow");
 }
 
-function hideBusPanels() {
-    $(".busPanels").fadeOut("slow");
+function hideBusPanel() {
+    $(".busPanel").fadeOut("slow");
 }
 
-function loadWeatherPanels() {
-    $(".weatherPanels").fadeIn("slow");
+function loadWeatherPanel() {
+    $(".weatherPanel").fadeIn("slow");
 }
 
-function hideWeatherPanels() {
-    $(".weatherPanels").fadeOut("slow");
+function hideWeatherPanel() {
+    $(".weatherPanel").fadeOut("slow");
+}
+function loadRidesharingPanel() {
+    $(".ridesharingPanel").fadeIn("slow");
+}
+function hideRidesharingPanel() {
+    $(".ridesharingPanel").fadeOut("slow");
+}
+function loadSocialPanel() {
+    $(".socialPanel").fadeIn("slow");
+}
+function hideSocialPanel() {
+    $(".socialPanel").fadeOut("slow");
+}
+function hideAllPanels() {
+    hideBusPanel();
+    hideRidesharingPanel();
+    hideWeatherPanel();
+    hideSocialPanel();
 }
 
 function loadPanels() {
-    loadBusPanels();
+    loadBusPanel();
     setTimeout(function () {
-        hideBusPanels();
+        hideAllPanels();
         loadWeatherPanels();
     }, 15000);
     setTimeout(function () {
-        hideWeatherPanels();
-        loadBusPanels();
+        hideAllPanels();
+        loadBusPanel();
     }, 30000);
+    setTimeout(function () {
+        hideAllPanels();
+        loadRidesharingPanel();
+    }, 45000);
+    setTimeout(function () {
+        hideAllPanels();
+        loadSocialPanel();
+    }, 60000);
 }
