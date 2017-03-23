@@ -1,3 +1,10 @@
+/*
+    This JS file is the main entry point for the server app. This runs the express server, creates the socket connection with the client side and gets all the necessary data from 
+    the APIs.
+    (C) Rakesh Das https://rakeshdas.com
+*/
+
+
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
@@ -19,6 +26,7 @@ var wallpaperJSONURL = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0
 var uberURL = "https://api.uber.com/v1/estimates/time?start_latitude=41.85841&start_longitude=-87.66033&server_token=9887VDxjbb26U2nMl9osSiKIGY48XGRQ2q_k6jBb";
 var lyftTokenRequestURL = "https://api.lyft.com/oauth/token";
 var lyftEtaURL = "https://api.lyft.com/v1/eta?lat=41.85841&lng=-87.66033"
+var nyTimesApi = "http://api.nytimes.com/svc/topstories/v1/home.json?api-key=12b3c10727f9a45375d342ed28c48176:11:72542931";
 var lyftClientId = "rdju0U0Gsr6c";
 var lyftClientSecret = "7BAXf3njLApyIJcg7dkADCtfVg4EIwKB";
 var lyftAccessToken;
@@ -36,17 +44,16 @@ var ubers = []; //array for predicted arrival of Ubers
 var lyfts = []; //array for predicted arrival of Lyfts
 var currWeather = []; //array for current weather conditions
 var futureWeather = []; //array for future weather conditions
+var news = []; //array for news headlines and abstracts
 var wallpaperURL; // bing wallpaper of the day URL 
 var time = moment(new Date).format("dddd, MMMM D, YYYY hh:mm:ss A");
 
-
-getTransitData();
-getUberData();
 getWeatherData();
-getLyftData();
+getAllData();
 setInterval(function () {
-    getTransitData()
+    getAllData()
 }, 60000);
+setInterval(getWeatherData, 3600000);
 setInterval(function () {
     sendAllData()
 }, 1000);
@@ -62,7 +69,8 @@ app.get('/', function (req, res) {
         wallpaperURL: wallpaperURL,
         time: time,
         moment: moment,
-        ubers: ubers
+        ubers: ubers,
+        news: news
     })
 });
 
@@ -162,7 +170,7 @@ function getUberData() {
             var uberArr = body.times;
             if (ubers.length != 0) ubers = [];
             uberArr.forEach(function (uber) {
-                if (uber.localized_display_name === "uberPOOL" || uber.localized_display_name === "uberX") {
+                if (uber.localized_display_name === "uberPOOL" || uber.localized_display_name === "uberX" || uber.localized_display_name === "UberBLACK") {
                     ubers.push(uber);
                 }
             })
@@ -257,6 +265,12 @@ function getWeatherData() {
 }
 
 function getNewsData() {
+    request({
+        url: nyTimesApi,
+        json: true
+    }, function (err, res, body) {
+        news = body.results;
+    })
 
 }
 
@@ -272,13 +286,14 @@ function getWallpaperOfTheDay() {
     })
 }
 
-function getTransitData() {
+function getAllData() {
     console.log("getting transit data...");
     get18Data();
     get60Data();
     getPLData();
     getUberData();
     getLyftEtaData();
+    getNewsData();
 }
 
 function sendAllData() {
@@ -292,5 +307,7 @@ function sendAllData() {
     io.sockets.emit('lyfts', lyfts);
     io.sockets.emit('currWeather', currWeather);
     io.sockets.emit('futureWeather', futureWeather);
+    io.sockets.emit('news', news);
+    
     
 }

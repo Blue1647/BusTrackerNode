@@ -1,83 +1,131 @@
-*{
-    
-}
+* {}
 
-#time{
+#time {
     color: white;
+    background-color: rgba(0, 0, 0, 0.35);
+    padding: 5px;
     font-size: 70px;
 }
-.panel-body{
+
+.panel-body {
     font-size: 35px;
 }
-.panel-heading{
+
+.panel-heading {
     font-size: 40px;
 }
-.pl-panel > .panel-heading{
+
+.pl-panel>.panel-heading {
     background-color: deeppink;
     color: white;
 }
-.pl-panel > .panel-body{
+
+.pl-panel>.panel-body {
     background-color: hotpink;
     color: white;
 }
-.west60-panel > .panel-heading{
+
+.west60-panel>.panel-heading {
     background-color: #8E44AD;
     color: white;
 }
-.west60-panel > .panel-body{
+
+.west60-panel>.panel-body {
     background-color: #9B59B6;
     color: white;
 }
-.east60-panel > .panel-heading{
+
+.east60-panel>.panel-heading {
     background-color: #2980B9;
     color: white;
 }
-.east60-panel > .panel-body{
+
+.east60-panel>.panel-body {
     background-color: #3498DB;
     color: white;
 }
-.west18-panel > .panel-heading{
+
+.west18-panel>.panel-heading {
     background-color: #D35400;
     color: white;
 }
-.west18-panel > .panel-body{
+
+.west18-panel>.panel-body {
     background-color: #E67E22;
     color: white;
 }
-.east18-panel > .panel-heading{
+
+.east18-panel>.panel-heading {
     background-color: #27AE60;
     color: white;
 }
-.east18-panel > .panel-body{
+
+.east18-panel>.panel-body {
     background-color: #2ECC71;
     color: white;
 }
-.wide{
+
+.wide {
     width: 95%;
 }
-.panel-body{
+
+.panel-body {
     background-color: #292939;
     color: white;
 }
-.tempCond{
+
+.tempCond {
     padding-left: 100px;
 }
-.day1-panel, .day2-panel, .day3-panel{
+
+.day0-panel,
+.day1-panel,
+.day2-panel {
     height: 450px;
 }
-.uber-panel > .panel-heading{
+
+.uber-panel>.panel-heading {
     background-color: black;
     color: white;
 }
-.uber-panel > .panel-body{
+
+.uber-panel>.panel-body {
     background-color: white;
     color: black;
 }
-.lyft-panel > .panel-heading{
+
+.lyft-panel>.panel-heading {
     background-color: #333447;
     color: white;
 }
-.lyft-panel > .panel-body{
+
+.lyft-panel>.panel-body {
     background-color: hotpink;
     color: white;
+}
+
+.socialPanel {
+    background-color: #127DB3;
+    padding-bottom: 200px;
+}
+
+.socialPanel h1 {
+    font-size: 84px;
+    margin: 100px auto;
+}
+
+.socialPanel h2 {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+marquee {
+    color: white;
+    font-size: 40px;
+}
+.navbar-fixed-bottom{
+    background-color: rgba(0, 0, 0, 0.35);
+}
+.hl{
+    color:#f1c40f;
 }
