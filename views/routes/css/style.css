@@ -106,6 +106,7 @@
 
 .socialPanel {
     background-color: #127DB3;
+    color: white;
     padding-bottom: 200px;
 }
 
@@ -124,6 +125,7 @@ marquee {
     font-size: 40px;
 }
 .navbar-fixed-bottom{
+    margin-bottom: 10px;
     background-color: rgba(0, 0, 0, 0.35);
 }
 .hl{
