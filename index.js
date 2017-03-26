@@ -90,14 +90,16 @@ function getPLData() {
                 pl54Times = [];
                 plLoopTimes = [];
             }
-            ETAs.forEach(function (eta) {
+            if (ETAs.length != 0) {
+                ETAs.forEach(function (eta) {
 
-                if (eta.destNm === "Loop") {
-                    plLoopTimes.push(eta);
-                } else {
-                    pl54Times.push(eta);
-                }
-            });
+                    if (eta.destNm === "Loop") {
+                        plLoopTimes.push(eta);
+                    } else {
+                        pl54Times.push(eta);
+                    }
+                });
+            }
         }
     });
 }
@@ -123,9 +125,7 @@ function get18Data() {
                         bus18West.push(eta);
                     }
                 });
-            } else {
-
-            }
+            } 
         }
     });
 }
@@ -204,16 +204,16 @@ function getLyftData() {
             lyftAccessToken = json.access_token;
             getLyftEtaData();
         } else if (error) {
-            
+
             console.log(error);
         }
     }
     request(options, callback);
-    
+
 }
 
 function getLyftEtaData() {
-    if (lyftAccessToken == null){
+    if (lyftAccessToken == null) {
         setTimeout(getLyftData, 50);
     }
     var headers = {
@@ -229,8 +229,8 @@ function getLyftEtaData() {
             var json = JSON.parse(response.body);
             lyfts = json.eta_estimates;
         }
-        
-        else if (response.statusCode == 401){
+
+        else if (response.statusCode == 401) {
             //if access_token has expired (access_token has lifespan of 24 hrs)
             getLyftData();
         }
@@ -308,6 +308,6 @@ function sendAllData() {
     io.sockets.emit('currWeather', currWeather);
     io.sockets.emit('futureWeather', futureWeather);
     io.sockets.emit('news', news);
-    
-    
+
+
 }
