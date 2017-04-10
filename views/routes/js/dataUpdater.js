@@ -18,36 +18,42 @@ jQuery(function ($) {
     var socket = io.connect();
     socket.on('plLoopTimes', function (data) {
         plLoopTimes.innerHTML = "";
+        if(data.length == 0) plLoopTimes.innerHTML = "Sorry, no service is scheduled. <img src=\"img/sad.png\" height=\"50\" width=\"50\"/>";
         data.forEach(function (transitObj) {
             plLoopTimes.innerHTML += "<ol>" + moment(transitObj.arrT).format("h:mm A") + "</ol>";
         });
     });
     socket.on('pl54Times', function (data) {
         pl54Times.innerHTML = "";
+        if(data.length == 0) pl54Times.innerHTML = "Sorry, no service is scheduled. <img src=\"img/sad.png\" height=\"50\" width=\"50\"/>";
         data.forEach(function (transitObj) {
             pl54Times.innerHTML += "<ol>" + moment(transitObj.arrT).format("h:mm A") + "</ol>";
         });
     });
     socket.on('bus18East', function (data) {
         bus18East.innerHTML = "";
+        if(data.length == 0) bus18East.innerHTML = "Sorry, no service is scheduled. <img src=\"img/sad.png\" height=\"50\" width=\"50\"/>";
         data.forEach(function (eta) {
             bus18East.innerHTML += "<ol>" + moment(new Date).add(eta.prdctdn, 'm').format("h:mm A") + "</ol>";
         });
     });
     socket.on('bus18West', function (data) {
         bus18West.innerHTML = "";
+        if(data.length == 0) bus18West.innerHTML = "Sorry, no service is scheduled. <img src=\"img/sad.png\" height=\"50\" width=\"50\"/>";
         data.forEach(function (eta) {
             bus18West.innerHTML += "<ol>" + moment(new Date).add(eta.prdctdn, 'm').format("h:mm A") + "</ol>";
         });
     });
     socket.on('bus60East', function (data) {
         bus60East.innerHTML = "";
+        if(data.length == 0) bus60East.innerHTML = "Sorry, no service is scheduled. <img src=\"img/sad.png\" height=\"50\" width=\"50\"/>";
         data.forEach(function (eta) {
             bus60East.innerHTML += "<ol>" + moment(new Date).add(eta.prdctdn, 'm').format("h:mm A") + "</ol>";
         });
     });
     socket.on('bus60West', function (data) {
         bus60West.innerHTML = "";
+        if(data.length == 0) bus60West.innerHTML = "Sorry, no service is scheduled. <img src=\"img/sad.png\" height=\"50\" width=\"50\"/>";
         data.forEach(function (eta) {
             bus60West.innerHTML += "<ol>" + moment(new Date).add(eta.prdctdn, 'm').format("h:mm A") + "</ol>";
         });

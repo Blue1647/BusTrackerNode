@@ -85,20 +85,25 @@ function getPLData() {
     }, function (err, res, body) {
         if (err) throw err;
         else if (!err, res.statusCode === 200) {
-            var ETAs = body.ctatt.eta
-            if (plLoopTimes.length != 0 || pl54Times.length != 0) {
+            if (body.ctatt.eta != undefined || body.ctatt.eta != null) {
+                var ETAs = body.ctatt.eta
+                if (plLoopTimes.length != 0 || pl54Times.length != 0) {
+                    pl54Times = [];
+                    plLoopTimes = [];
+                }
+                if (ETAs.length != 0) {
+                    ETAs.forEach(function (eta) {
+                        if (eta.destNm === "Loop") {
+                            plLoopTimes.push(eta);
+                        } else {
+                            pl54Times.push(eta);
+                        }
+                    });
+                }
+            }
+            else {
                 pl54Times = [];
                 plLoopTimes = [];
-            }
-            if (ETAs.length != 0) {
-                ETAs.forEach(function (eta) {
-
-                    if (eta.destNm === "Loop") {
-                        plLoopTimes.push(eta);
-                    } else {
-                        pl54Times.push(eta);
-                    }
-                });
             }
         }
     });

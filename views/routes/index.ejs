@@ -30,16 +30,6 @@
                         <div class="panel-body errWest60">
                             Expected Bus Arrival Times:
                             <div id="west60">
-                                <% bus60West.forEach(function(eta){%>
-                                    <ol>
-                                        <%
-                                        if(eta.prdctdn != "DUE" || eta.length !=0){%>
-                                            <%=moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")%>
-                                                <%} else {%>
-                                                    <p>Sorry, no service is scheduled</p>
-                                                    <% } %>
-                                    </ol>
-                                    <%});%>
                             </div>
                         </div>
                     </div>
@@ -51,17 +41,6 @@
                         <div class="panel-body errEast60">
                             Expected Bus Arrival Times:
                             <div id="east60">
-                                <% bus60East.forEach(function(eta){%>
-                                    <ol>
-                                        <%
-                                        if(eta.prdctdn != "DUE" || eta.length !=0){%>
-                                            <%=moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")%>
-                                                <%setInterval(function(){moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")}, 60000)%>
-                                                    <%} else {%>
-                                                        <%="Sorry, no service is scheduled"%>
-                                                            <% } %>
-                                    </ol>
-                                    <%});%>
                             </div>
                         </div>
                     </div>
@@ -73,17 +52,6 @@
                         <div class="panel-body errWest18">
                             Expected Bus Arrival Times:
                             <div id="west18">
-                                <% bus18West.forEach(function(eta){%>
-                                    <ol>
-                                        <%
-                                        if(eta.prdctdn != "DUE" || eta.length !=0){%>
-                                            <%=moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")%>
-                                                <%setInterval(function(){moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")}, 60000)%>
-                                                    <%} else {%>
-                                                        <%="Sorry, no service is scheduled"%>
-                                                            <% } %>
-                                    </ol>
-                                    <%});%>
                             </div>
                         </div>
                     </div>
@@ -98,18 +66,7 @@
                         </div>
                         <div class="panel-body errEast18">
                             Expected Bus Arrival Times:
-                            <div id="east18">
-                                <% bus18East.forEach(function(eta){%>
-                                    <ol>
-                                        <%
-                                        if(eta.prdctdn != "DUE" || eta.length !=0){%>
-                                            <%=moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")%>
-                                                <%setInterval(function(){moment(new Date).add(eta.prdctdn, 'm').format("h:mm A")}, 60000)%>
-                                                    <%} else {%>
-                                                        <%="Sorry, no service is scheduled"%>
-                                                            <% } %>
-                                    </ol>
-                                    <%});%>
+                            <div id="east18"> 
                             </div>
                         </div>
                     </div>
@@ -120,12 +77,6 @@
                         <div class="panel-body errPl54">
                             Expected Train Arrival Times:
                             <div id="Pl54">
-                                <% pl54Times.forEach(function(eta){%>
-                                    <ol>
-                                        <%=moment(eta.arrT).format("h:mm A")%>
-                                            <%setInterval(function(){moment(eta.arrT).format("h:mm A")}, 60000)%>
-                                    </ol>
-                                    <%});%>
                             </div>
                         </div>
                     </div>
@@ -136,12 +87,6 @@
                         <div class="panel-body errPlLoop">
                             Expected Train Arrival Times:
                             <div id="PlLoop">
-                                <% plLoopTimes.forEach(function(eta){%>
-                                    <ol>
-                                        <%=moment(eta.arrT).format("h:mm A")%>
-                                            <%setInterval(function(){moment(eta.arrT).format("h:mm A")}, 60000)%>
-                                    </ol>
-                                    <%});%>
                             </div>
                         </div>
                     </div>
