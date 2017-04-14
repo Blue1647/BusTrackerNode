@@ -11,7 +11,7 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var request = require('request');
 var moment = require('moment');
-
+var os = require('os');
 
 
 app.set('view engine', 'ejs');
@@ -33,6 +33,8 @@ var lyftAccessToken;
 var weatherAPIKey = "12d2e28ea368c6f7"
 var currWeatherURL = "http://api.wunderground.com/api/" + weatherAPIKey + "/conditions/q/IL/Chicago.json"
 var futureWeatherURL = "http://api.wunderground.com/api/" + weatherAPIKey + "/forecast/q/IL/Chicago.json"
+var optSys = os.platform(); //determines current os to account for proper file paths
+var routesPath; // route path for the server
 
 var plLoopTimes = []; //array for predicted arrival of Pink line Loop bound trains
 var pl54Times = []; //array for predicted arrival of Pink line 54th/cermak bound trains
@@ -48,6 +50,8 @@ var news = []; //array for news headlines and abstracts
 var wallpaperURL; // bing wallpaper of the day URL 
 var time = moment(new Date).format("dddd, MMMM D, YYYY hh:mm:ss A");
 
+
+determineProperFilePath();
 getWeatherData();
 getAllData();
 setInterval(function () {
@@ -59,7 +63,7 @@ setInterval(function () {
 }, 1000);
 getWallpaperOfTheDay();
 app.get('/', function (req, res) {
-    res.render('routes/index', {
+    res.render(routesPath, {
         plLoopTimes: plLoopTimes,
         pl54Times: pl54Times,
         bus18East: bus18East,
@@ -290,7 +294,15 @@ function getWallpaperOfTheDay() {
         }
     })
 }
-
+function determineProperFilePath(){
+    if (optSys == 'linux') {
+        routesPath = '/var/www/html/BusTrackerNode/views/routes/index';
+    }
+    else {
+        routesPath = 'routes/index';
+    }
+    console.log("Route: " + routesPath);
+}
 function getAllData() {
     console.log("getting transit data...");
     get18Data();
@@ -313,6 +325,4 @@ function sendAllData() {
     io.sockets.emit('currWeather', currWeather);
     io.sockets.emit('futureWeather', futureWeather);
     io.sockets.emit('news', news);
-
-
 }

@@ -4,6 +4,7 @@
 <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
+     <meta http-equiv="refresh" content="7200">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/roboto.min.css" rel="stylesheet">
     <link href="css/material.min.css" rel="stylesheet">
@@ -14,8 +15,6 @@
 
 <body background="<%=wallpaperURL%>">
     <div class="container wide wrap">
-        <!--<img src="img/logo.jpg" width = "100%"/>-->
-
         &nbsp;
         <!--Curr time-->
         <h1 class="text-center" id="time"></h1>
@@ -94,10 +93,6 @@
             </div>
         </div>
                 <br>
-
-
-
-
                 <div class="ridesharingPanel">
                     <div class="row">
                         <div class="panel panel-default uber-panel">
@@ -105,11 +100,6 @@
                             <div class="panel-body errPlLoop">
                                 Expected Uber Arrival Times:
                                 <div id="uber">
-                                    <%ubers.forEach(function (uber) {%>
-                                        <ol>
-                                            <%=uber.localized_display_name%>:
-                                                <%=Math.floor((uber.estimate)/60)%> mins away </ol>
-                                        <%});%>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +110,6 @@
                             <div class="panel-body errPlLoop">
                                 Expected Lyft Arrival Times:
                                 <div id="lyft">
-
                                 </div>
                             </div>
                         </div>
