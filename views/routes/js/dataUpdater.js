@@ -69,8 +69,6 @@ jQuery(function ($) {
         });
     });
     socket.on('lyfts', function (data) {
-
-            console.log("Lyfts = " + JSON.stringify(data));
         lyfts.innerHTML = "";
         data.forEach(function (lyft) {
             if (Math.floor((lyft.eta_seconds) / 60) == 1) {
@@ -84,7 +82,7 @@ jQuery(function ($) {
     socket.on('news', function (data) {
         news.innerHTML = "";
         data.forEach(function (newsData) {
-            news.innerHTML += "<b class = \"hl\">" + newsData.title + "</b>" + ": " + newsData.abstract + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;"
+            news.innerHTML += "<b class = \"hl\">" + newsData.title + "</b>" + ": " + newsData.description + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;"
         });
     });
 
