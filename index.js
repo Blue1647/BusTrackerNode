@@ -46,13 +46,13 @@ var time = moment(new Date).format("dddd, MMMM D, YYYY hh:mm:ss A");
 determineProperFilePath();
 getWeatherData();
 getAllData();
-setInterval(function () {
-    getAllData()
-}, 60000);
 setInterval(getWeatherData, 3600000);
 setInterval(function () {
     sendAllData()
 }, 1000);
+setInterval(function () {
+    getAllData()
+}, 60000);
 getWallpaperOfTheDay();
 app.get('/', function (req, res) {
     res.render(routesPath, {
@@ -103,15 +103,6 @@ function getWeatherData() {
 
 }
 
-function getNewsData() {
-    request({
-        url: nyTimesApi,
-        json: true
-    }, function (err, res, body) {
-        news = body.results;
-    })
-
-}
 
 function getWallpaperOfTheDay() {
     request({
@@ -151,6 +142,7 @@ function getAllData() {
     ubers = ridesharingDataFetcher.ubers;
     newsDataFetcher.getNewsData();
     news = newsDataFetcher.news;
+    console.log(lyfts);
 }
 
 function sendAllData() {

@@ -13,55 +13,21 @@ function getNewsData() {
 
     async.map(newsUrls, function (url, callback) {
         request(url, function (err, res, body) {
-            // body.articles.forEach(function (article) {
-            //     news.push(article);
-            // });
             callback(err, body);
         });
     },
         function (err, results) {
             results.forEach(function(result){
-                news.push(JSON.parse(result).articles);
-            })
+                var jsonResult = JSON.parse(result);
+                jsonResult.articles.forEach(function(article){
+                    news.push(article);
+                })
+            });
+            shuffle(news);
             if (err) throw err;
-            console.log(news);
         });
+
 }
-
-function getCnnData() {
-    request({
-        url: cnnNewsUrl,
-        json: true
-    }, function (err, res, body) {
-        body.articles.forEach(function (article) {
-            news.push(article);
-        });
-    })
-}
-
-function getBusinessInsiderData() {
-    request({
-        url: businessInsiderNewsUrl,
-        json: true
-    }, function (err, res, body) {
-        body.articles.forEach(function (article) {
-            news.push(article);
-        });
-    })
-}
-
-
-function getApData() {
-    request({
-        url: apNewsUrl,
-        json: true
-    }, function (err, res, body) {
-        body.articles.forEach(function (article) {
-            news.push(article);
-        });
-    })
-}
-
 function shuffle(a) {
     var j, x, i;
     for (i = a.length; i; i--) {

@@ -69,6 +69,7 @@ jQuery(function ($) {
         });
     });
     socket.on('lyfts', function (data) {
+        console.log(data);
         lyfts.innerHTML = "";
         data.forEach(function (lyft) {
             if (Math.floor((lyft.eta_seconds) / 60) == 1) {

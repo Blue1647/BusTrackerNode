@@ -81,7 +81,7 @@
 .day0-panel,
 .day1-panel,
 .day2-panel {
-    height: 450px;
+    height: 425px;
 }
 
 .uber-panel>.panel-heading {
@@ -125,7 +125,7 @@ marquee {
     font-size: 40px;
 }
 .navbar-fixed-bottom{
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     background-color: rgba(0, 0, 0, 0.35);
 }
 .hl{
