@@ -1,3 +1,9 @@
+/*
+    This JS file is the handles calling the CTA API and getting the necessary data from it.
+    (C) Rakesh Das https://rakeshdas.com
+*/
+
+
 var request = require('request');
 
 //  API URLs:

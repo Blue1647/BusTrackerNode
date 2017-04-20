@@ -1,6 +1,6 @@
 /*
     This JS file which runs on the client side connects to the backend Node server via a socket and all the data (transit data, news data, Uber/Lyft
-    data, weather data, etcc. Is then sent and received via that socket connection.
+    data, weather data, etc.) is then sent and received via that socket connection.
     (C) 2017 Rakesh Das - https://rakeshdas.com
 */
 jQuery(function ($) {
@@ -14,7 +14,8 @@ jQuery(function ($) {
     var lyfts = document.getElementById("lyft"); //element for predicted arrival of lyfts
     var news = document.getElementById("news") //element for news headlines and abstracts
     var currCond = document.getElementById("curr-cond"); //element for current conditions
-
+    var wallpaper = document.getElementById("body"); //element for body
+    
     var socket = io.connect();
     socket.on('plLoopTimes', function (data) {
         plLoopTimes.innerHTML = "";
@@ -68,8 +69,10 @@ jQuery(function ($) {
             }
         });
     });
+    socket.on('wallpaperURL', function(data){
+        body.style.backgroundImage = 'url("'+data+'" )'; 
+    });
     socket.on('lyfts', function (data) {
-        console.log(data);
         lyfts.innerHTML = "";
         data.forEach(function (lyft) {
             if (Math.floor((lyft.eta_seconds) / 60) == 1) {

@@ -1,3 +1,9 @@
+/*
+    This JS file is the handles calling the NewsAPI and getting the necessary data from it.
+    (C) Rakesh Das https://rakeshdas.com
+*/
+
+
 var request = require('request');
 var async = require('async');
 var newsApiKey = "0d58b36380f045f48f7aa174c8083ba6";

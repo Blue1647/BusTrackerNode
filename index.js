@@ -7,6 +7,7 @@
 var ctaDataFetcher = require('./ctaDataFetcher');
 var ridesharingDataFetcher = require('./ridesharingDataFetcher');
 var newsDataFetcher = require('./newsDataFetcher.js');
+var weatherDataFetcher = require('./weatherDataFetcher');
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
@@ -42,7 +43,6 @@ var news = []; //array for news headlines and abstracts
 var wallpaperURL; // bing wallpaper of the day URL 
 var time = moment(new Date).format("dddd, MMMM D, YYYY hh:mm:ss A");
 
-
 determineProperFilePath();
 getWeatherData();
 getAllData();
@@ -54,6 +54,7 @@ setInterval(function () {
     getAllData()
 }, 60000);
 getWallpaperOfTheDay();
+setInterval(getWallpaperOfTheDay, 10800000) //3 hrs
 app.get('/', function (req, res) {
     res.render(routesPath, {
         plLoopTimes: plLoopTimes,
@@ -79,28 +80,9 @@ console.log("Running server on http://localhost:8888 ....");
 
 
 function getWeatherData() {
-    request({
-        url: currWeatherURL,
-        json: true
-    }, function (err, res, body) {
-        if (err) throw err;
-        else if (!err && res.statusCode === 200) {
-            currWeather = body.current_observation;
-        }
-    });
-    request({
-        url: futureWeatherURL,
-        json: true
-    }, function (err, res, body) {
-        if (err) throw err;
-        else if (!err && res.statusCode === 200) {
-            for (var i = 1; i < 4; i++) {
-                futureWeather.push(body.forecast.simpleforecast.forecastday[i]);
-            }
-        }
-
-    })
-
+    weatherDataFetcher.getWeatherData();
+    currWeather = weatherDataFetcher.currWeather;
+    futureWeather = weatherDataFetcher.futureWeather;
 }
 
 
@@ -142,7 +124,6 @@ function getAllData() {
     ubers = ridesharingDataFetcher.ubers;
     newsDataFetcher.getNewsData();
     news = newsDataFetcher.news;
-    console.log(lyfts);
 }
 
 function sendAllData() {
@@ -157,4 +138,5 @@ function sendAllData() {
     io.sockets.emit('currWeather', currWeather);
     io.sockets.emit('futureWeather', futureWeather);
     io.sockets.emit('news', news);
+    io.sockets.emit('wallpaperURL', wallpaperURL);
 }

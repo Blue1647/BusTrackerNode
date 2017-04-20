@@ -1,3 +1,8 @@
+/*
+    This JS file is the handles calling the Lyft and Uber APIs and getting the necessary data from them.
+    (C) Rakesh Das https://rakeshdas.com
+*/
+
 var request = require('request');
 //API URLs:
 var uberURL = "https://api.uber.com/v1/estimates/time?start_latitude=41.85841&start_longitude=-87.66033&server_token=9887VDxjbb26U2nMl9osSiKIGY48XGRQ2q_k6jBb";
@@ -87,6 +92,7 @@ function getLyftEtaData() {
         }
     }
     request(options, callback);
+    if(lyfts.length != 0) module.exports.lyfts = lyfts;
 
 }
 
