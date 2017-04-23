@@ -22,10 +22,6 @@ app.use(express.static(__dirname + '/views/routes/'));
 
 //  API URLs:
 var wallpaperJSONURL = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US";
-var nyTimesApi = "http://api.nytimes.com/svc/topstories/v1/home.json?api-key=12b3c10727f9a45375d342ed28c48176:11:72542931";
-var weatherAPIKey = "12d2e28ea368c6f7"
-var currWeatherURL = "http://api.wunderground.com/api/" + weatherAPIKey + "/conditions/q/IL/Chicago.json"
-var futureWeatherURL = "http://api.wunderground.com/api/" + weatherAPIKey + "/forecast/q/IL/Chicago.json"
 var optSys = os.platform(); //determines current os to account for proper file paths
 var routesPath; // route path for the server
 
@@ -74,10 +70,6 @@ app.get('/', function (req, res) {
 
 server.listen(8888);
 console.log("Running server on http://localhost:8888 ....");
-
-
-
-
 
 function getWeatherData() {
     weatherDataFetcher.getWeatherData();
@@ -138,5 +130,4 @@ function sendAllData() {
     io.sockets.emit('currWeather', currWeather);
     io.sockets.emit('futureWeather', futureWeather);
     io.sockets.emit('news', news);
-    io.sockets.emit('wallpaperURL', wallpaperURL);
 }
