@@ -38,9 +38,7 @@ function getNewsData() {
         json: true
     }, function (err, res, body) {
         news = body.results;
-        console.log(body);
     })
-    console.log("news arr: " + JSON.stringify(news));
 
 
 }
