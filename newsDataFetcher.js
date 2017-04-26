@@ -10,6 +10,7 @@ var newsApiKey = "0d58b36380f045f48f7aa174c8083ba6";
 var cnnNewsUrl = "https://newsapi.org/v1/articles?source=cnn&sortBy=top&apiKey=" + newsApiKey;
 var businessInsiderNewsUrl = "https://newsapi.org/v1/articles?source=business-insider&sortBy=top&apiKey=" + newsApiKey;
 var apNewsUrl = "https://newsapi.org/v1/articles?source=associated-press&sortBy=top&apiKey=" + newsApiKey;
+var nyTimesApi = "http://api.nytimes.com/svc/topstories/v1/home.json?api-key=12b3c10727f9a45375d342ed28c48176:11:72542931";
 
 var newsUrls = [cnnNewsUrl, businessInsiderNewsUrl, apNewsUrl];
 
@@ -17,7 +18,7 @@ var news = []; //array for news headlines and abstracts
 
 function getNewsData() {
 
-    async.map(newsUrls, function (url, callback) {
+    /*async.map(newsUrls, function (url, callback) {
         request(url, function (err, res, body) {
             callback(err, body);
         });
@@ -31,7 +32,16 @@ function getNewsData() {
             });
             shuffle(news);
             if (err) throw err;
-        });
+        });*/
+        request({
+        url: nyTimesApi,
+        json: true
+    }, function (err, res, body) {
+        news = body.results;
+        console.log(body);
+    })
+    console.log("news arr: " + JSON.stringify(news));
+
 
 }
 function shuffle(a) {
