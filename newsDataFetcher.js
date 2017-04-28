@@ -42,5 +42,7 @@ function shuffle(a) {
 
 module.exports = {
     getNewsData: getNewsData,
-    news: news
+    news: function(){
+        return news;
+    }
 }

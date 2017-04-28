@@ -87,7 +87,7 @@ jQuery(function ($) {
         news.innerHTML = "";
         console.log(data);
         data.forEach(function (newsData) {
-            news.innerHTML += "<b class = \"hl\">" + newsData.title + "</b>" + ": " + newsData.description + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;"
+            news.innerHTML += "<b class = \"hl\">" + newsData.title + "</b>" + ": " + newsData.abstract + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;"
         });
     });
 

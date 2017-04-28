@@ -41,29 +41,16 @@ var time = moment(new Date).format("dddd, MMMM D, YYYY hh:mm:ss A");
 
 determineProperFilePath();
 getWeatherData();
-getAllData();
-setInterval(getWeatherData, 3600000);
-setInterval(function () {
-    sendAllData()
-}, 1000);
-setInterval(function () {
-    getAllData()
-}, 60000);
+getNewsData();
+getTransitData();
 getWallpaperOfTheDay();
-setInterval(getWallpaperOfTheDay, 10800000) //3 hrs
+setInterval(getWeatherData, 3600000); //every hr
+setInterval(getTransitData, 60000); //every min
+setInterval(sendAllData, 1000); // every sec
+setInterval(getWallpaperOfTheDay, 10800000) //every 3 hrs
 app.get('/', function (req, res) {
     res.render(routesPath, {
-        plLoopTimes: plLoopTimes,
-        pl54Times: pl54Times,
-        bus18East: bus18East,
-        bus18West: bus18West,
-        bus60East: bus60East,
-        bus60West: bus60West,
-        wallpaperURL: wallpaperURL,
-        time: time,
-        moment: moment,
-        ubers: ubers,
-        news: news
+        wallpaperURL: wallpaperURL
     })
 });
 
@@ -75,6 +62,10 @@ function getWeatherData() {
     weatherDataFetcher.getWeatherData();
     currWeather = weatherDataFetcher.currWeather;
     futureWeather = weatherDataFetcher.futureWeather;
+}
+function getNewsData() {
+    newsDataFetcher.getNewsData();
+    news = newsDataFetcher.news();
 }
 
 
@@ -99,7 +90,7 @@ function determineProperFilePath(){
     }
     console.log("Route: " + routesPath);
 }
-function getAllData() {
+function getTransitData() {
     console.log("getting data...");
     ctaDataFetcher.get18Data();
     ctaDataFetcher.get60Data();
@@ -114,9 +105,6 @@ function getAllData() {
     ridesharingDataFetcher.getLyftEtaData();
     lyfts = ridesharingDataFetcher.lyfts;
     ubers = ridesharingDataFetcher.ubers;
-    newsDataFetcher.getNewsData();
-    news = newsDataFetcher.news;
-    console.log(newsDataFetcher.news);
     
     
 }
