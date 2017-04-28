@@ -85,6 +85,7 @@ jQuery(function ($) {
     });
     socket.on('news', function (data) {
         news.innerHTML = "";
+        console.log(data);
         data.forEach(function (newsData) {
             news.innerHTML += "<b class = \"hl\">" + newsData.title + "</b>" + ": " + newsData.description + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;"
         });
@@ -92,6 +93,7 @@ jQuery(function ($) {
 
     socket.on('currWeather', function (data) {
         currCond.innerHTML = "";
+        // console.log(data);
         var currTemp = Math.round(data.temp_f);
         var currFeelsLikeTemp = Math.round(data.feelslike_f);
         var currCondStr = data.weather;

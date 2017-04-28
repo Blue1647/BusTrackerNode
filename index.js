@@ -6,8 +6,8 @@
 
 var ctaDataFetcher = require('./ctaDataFetcher');
 var ridesharingDataFetcher = require('./ridesharingDataFetcher');
-var newsDataFetcher = require('./newsDataFetcher.js');
 var weatherDataFetcher = require('./weatherDataFetcher');
+var newsDataFetcher = require('./newsDataFetcher');
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
@@ -116,6 +116,9 @@ function getAllData() {
     ubers = ridesharingDataFetcher.ubers;
     newsDataFetcher.getNewsData();
     news = newsDataFetcher.news;
+    console.log(newsDataFetcher.news);
+    
+    
 }
 
 function sendAllData() {
