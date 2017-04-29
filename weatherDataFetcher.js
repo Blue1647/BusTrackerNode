@@ -14,6 +14,8 @@ function getWeatherData() {
         if (err) throw err;
         else if (!err && res.statusCode === 200) {
             currWeather = body.current_observation;
+            console.log(currWeatherURL);
+            console.log(currWeather.temp_f);
         }
     });
     request({
@@ -26,7 +28,6 @@ function getWeatherData() {
                 futureWeather.push(body.forecast.simpleforecast.forecastday[i]);
             }
         }
-
     })
 
 }

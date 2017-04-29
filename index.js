@@ -45,9 +45,16 @@ getNewsData();
 getTransitData();
 getWallpaperOfTheDay();
 setInterval(getWeatherData, 3600000); //every hr
+setInterval(getNewsData, 3600000); //every hr
 setInterval(getTransitData, 60000); //every min
 setInterval(sendAllData, 1000); // every sec
 setInterval(getWallpaperOfTheDay, 10800000) //every 3 hrs
+setInterval(function () {
+    news = [];
+    lyfts = [];
+    news = newsDataFetcher.news();
+    lyfts = ridesharingDataFetcher.lyfts;
+}, 500);
 app.get('/', function (req, res) {
     res.render(routesPath, {
         wallpaperURL: wallpaperURL
@@ -61,7 +68,10 @@ console.log("Running server on http://localhost:8888 ....");
 function getWeatherData() {
     weatherDataFetcher.getWeatherData();
     currWeather = weatherDataFetcher.currWeather;
+
+    console.log("index.js: " + currWeather.temp_f);
     futureWeather = weatherDataFetcher.futureWeather;
+    console.log("index.js: " + futureWeather.length);
 }
 function getNewsData() {
     newsDataFetcher.getNewsData();
@@ -80,7 +90,7 @@ function getWallpaperOfTheDay() {
         }
     })
 }
-function determineProperFilePath(){
+function determineProperFilePath() {
     if (optSys == 'linux') {
         //absolute path for server
         routesPath = '/var/www/html/BusTrackerNode/views/routes/index';
@@ -105,8 +115,8 @@ function getTransitData() {
     ridesharingDataFetcher.getLyftEtaData();
     lyfts = ridesharingDataFetcher.lyfts;
     ubers = ridesharingDataFetcher.ubers;
-    
-    
+
+
 }
 
 function sendAllData() {
