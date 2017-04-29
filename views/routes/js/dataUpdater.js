@@ -145,6 +145,7 @@ function getIconForCond(cond) {
         case "Chance Rain":
         case "Freezing Rain":
         case "Rain Mist":
+        case "Light Rain":
         case "Rain Showers":
             return '../img/weatherIcons/40.png'
             break;
