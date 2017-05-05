@@ -24,6 +24,7 @@ var bus60West = []; //array for predicted arrival of 60 westbound buses
 
 
 function getPLData() {
+    console.log("getting PL data...");  
     request({
         url: pinkTrackerURL,
         json: true
@@ -51,6 +52,8 @@ function getPLData() {
                 plLoopTimes = [];
             }
         }
+        console.log("After 54th response " + pl54Times.length);
+        console.log("After loop response " + plLoopTimes.length);
     });
 }
 
@@ -114,8 +117,12 @@ module.exports = {
     get18Data: get18Data,
     get60Data: get60Data,
     getPLData: getPLData,
-    plLoopTimes: plLoopTimes,
-    pl54Times: pl54Times,
+    plLoopTimes: function () {
+        return plLoopTimes;
+    },
+    pl54Times: function () {
+        return pl54Times;
+    },
     bus18East: bus18East,
     bus18West:bus18West,
     bus60East: bus60East,

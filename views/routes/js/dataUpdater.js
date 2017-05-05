@@ -18,6 +18,7 @@ jQuery(function ($) {
     
     var socket = io.connect();
     socket.on('plLoopTimes', function (data) {
+        console.log('Got PL Loop ' + data.length);
         plLoopTimes.innerHTML = "";
         if(data.length == 0) plLoopTimes.innerHTML = "Sorry, no service is scheduled. <img src=\"img/sad.png\" height=\"50\" width=\"50\"/>";
         data.forEach(function (transitObj) {
@@ -25,6 +26,7 @@ jQuery(function ($) {
         });
     });
     socket.on('pl54Times', function (data) {
+        console.log('Got PL 54th ' + data.length);
         pl54Times.innerHTML = "";
         if(data.length == 0) pl54Times.innerHTML = "Sorry, no service is scheduled. <img src=\"img/sad.png\" height=\"50\" width=\"50\"/>";
         data.forEach(function (transitObj) {

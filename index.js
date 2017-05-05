@@ -104,8 +104,8 @@ function getTransitData() {
     ctaDataFetcher.get18Data();
     ctaDataFetcher.get60Data();
     ctaDataFetcher.getPLData();
-    pl54Times = ctaDataFetcher.pl54Times;
-    plLoopTimes = ctaDataFetcher.plLoopTimes;
+    pl54Times = ctaDataFetcher.pl54Times();
+    plLoopTimes = ctaDataFetcher.plLoopTimes();
     bus18East = ctaDataFetcher.bus18East;
     bus18West = ctaDataFetcher.bus18West;
     bus60East = ctaDataFetcher.bus60East;
@@ -114,6 +114,8 @@ function getTransitData() {
     ridesharingDataFetcher.getLyftEtaData();
     lyfts = ridesharingDataFetcher.lyfts;
     ubers = ridesharingDataFetcher.ubers;
+    console.log(pl54Times.length);
+    console.log(plLoopTimes.length);
 }
 
 function sendAllData() {
