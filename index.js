@@ -52,8 +52,10 @@ setInterval(getWallpaperOfTheDay, 10800000) //every 3 hrs
 setInterval(function () {
     news = [];
     lyfts = [];
+    currWeather = [];
     news = newsDataFetcher.news();
     lyfts = ridesharingDataFetcher.lyfts;
+    currWeather = weatherDataFetcher.currWeather();
 }, 500);
 app.get('/', function (req, res) {
     res.render(routesPath, {
@@ -67,11 +69,8 @@ console.log("Running server on http://localhost:8888 ....");
 
 function getWeatherData() {
     weatherDataFetcher.getWeatherData();
-    currWeather = weatherDataFetcher.currWeather;
-
-    console.log("index.js: " + currWeather.temp_f);
+    currWeather = weatherDataFetcher.currWeather();
     futureWeather = weatherDataFetcher.futureWeather;
-    console.log("index.js: " + futureWeather.length);
 }
 function getNewsData() {
     newsDataFetcher.getNewsData();
@@ -115,8 +114,6 @@ function getTransitData() {
     ridesharingDataFetcher.getLyftEtaData();
     lyfts = ridesharingDataFetcher.lyfts;
     ubers = ridesharingDataFetcher.ubers;
-
-
 }
 
 function sendAllData() {

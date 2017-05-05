@@ -92,7 +92,6 @@ jQuery(function ($) {
 
     socket.on('currWeather', function (data) {
         currCond.innerHTML = "";
-        console.log(data);
         var currTemp = Math.round(data.temp_f);
         var currFeelsLikeTemp = Math.round(data.feelslike_f);
         var currCondStr = data.weather;
@@ -103,7 +102,6 @@ jQuery(function ($) {
         document.getElementById("curr-body").style.backgroundColor = colors.body;
     });
     socket.on('futureWeather', function (data) {
-        console.log(data);
         data.forEach(function (data, i) {
             var dateDay = data.date.weekday;
             var highTemp = data.high.fahrenheit;

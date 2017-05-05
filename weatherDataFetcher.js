@@ -14,8 +14,6 @@ function getWeatherData() {
         if (err) throw err;
         else if (!err && res.statusCode === 200) {
             currWeather = body.current_observation;
-            console.log(currWeatherURL);
-            console.log(currWeather.temp_f);
         }
     });
     request({
@@ -35,6 +33,8 @@ function getWeatherData() {
 
 module.exports = {
     getWeatherData: getWeatherData,
-    currWeather: currWeather,
-    futureWeather: futureWeather
+    futureWeather: futureWeather,
+    currWeather: function () {
+        return currWeather;
+    }
 }
