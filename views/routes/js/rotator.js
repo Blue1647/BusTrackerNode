@@ -8,7 +8,8 @@
 $(document).ready(
     function () {
         hideAllPanels();
-        loadPanels();
+        //loadPanels();
+        loadRidesharingPanel();
     }
 )
 
