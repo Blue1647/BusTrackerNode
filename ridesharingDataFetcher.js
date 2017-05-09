@@ -101,5 +101,7 @@ module.exports = {
     getLyftEtaData: getLyftEtaData,
     getUberData: getUberData,
     lyfts: lyfts,
-    ubers: ubers
+    ubers: function () {
+        return ubers;
+    }
 }

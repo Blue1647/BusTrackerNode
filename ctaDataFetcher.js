@@ -12,6 +12,7 @@ var busTrackerBase = "http://ctabustracker.com/bustime/api/v2/getpredictions?key
 var Bus18URL = "&rt=18&stpid=6813,6765&top=5&format=json";
 var Bus60URL = "&rt=60&stpid=6375,6337&top=5&format=json";
 
+
 //data arrays:
 var plLoopTimes = []; //array for predicted arrival of Pink line Loop bound trains
 var pl54Times = []; //array for predicted arrival of Pink line 54th/cermak bound trains
@@ -24,7 +25,6 @@ var bus60West = []; //array for predicted arrival of 60 westbound buses
 
 
 function getPLData() {
-    console.log("getting PL data...");  
     request({
         url: pinkTrackerURL,
         json: true
@@ -52,8 +52,6 @@ function getPLData() {
                 plLoopTimes = [];
             }
         }
-        console.log("After 54th response " + pl54Times.length);
-        console.log("After loop response " + plLoopTimes.length);
     });
 }
 
@@ -104,9 +102,6 @@ function get60Data() {
                         bus60West.push(eta);
                     }
                 });
-            } else {
-                bus60West.push("Sorry, no service is scheduled!");
-                bus60East.push("Sorry, no service is scheduled!");
             }
         }
 
@@ -123,8 +118,16 @@ module.exports = {
     pl54Times: function () {
         return pl54Times;
     },
-    bus18East: bus18East,
-    bus18West:bus18West,
-    bus60East: bus60East,
-    bus60West: bus60West
+    bus18East: function () {
+        return bus18East;
+    },
+    bus18West:function () {
+        return bus18West;
+    },
+    bus60East: function () {
+        return bus60East;
+    },
+    bus60West: function () {
+        return bus60West;
+    }
 }

@@ -1,3 +1,8 @@
+/*
+    This JS file is the handles calling the Wundergroud API and getting the necessary data from it.
+    (C) Rakesh Das https://rakeshdas.com
+*/
+
 var request = require('request');
 
 var weatherAPIKey = "12d2e28ea368c6f7"
@@ -33,7 +38,9 @@ function getWeatherData() {
 
 module.exports = {
     getWeatherData: getWeatherData,
-    futureWeather: futureWeather,
+    futureWeather: function () {
+        return futureWeather;
+    },
     currWeather: function () {
         return currWeather;
     }

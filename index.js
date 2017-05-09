@@ -70,7 +70,7 @@ console.log("Running server on http://localhost:8888 ....");
 function getWeatherData() {
     weatherDataFetcher.getWeatherData();
     currWeather = weatherDataFetcher.currWeather();
-    futureWeather = weatherDataFetcher.futureWeather;
+    futureWeather = weatherDataFetcher.futureWeather();
 }
 function getNewsData() {
     newsDataFetcher.getNewsData();
@@ -106,16 +106,14 @@ function getTransitData() {
     ctaDataFetcher.getPLData();
     pl54Times = ctaDataFetcher.pl54Times();
     plLoopTimes = ctaDataFetcher.plLoopTimes();
-    bus18East = ctaDataFetcher.bus18East;
-    bus18West = ctaDataFetcher.bus18West;
-    bus60East = ctaDataFetcher.bus60East;
-    bus60West = ctaDataFetcher.bus60West;
+    bus18East = ctaDataFetcher.bus18East();
+    bus18West = ctaDataFetcher.bus18West();
+    bus60East = ctaDataFetcher.bus60East();
+    bus60West = ctaDataFetcher.bus60West();
     ridesharingDataFetcher.getUberData();
     ridesharingDataFetcher.getLyftEtaData();
+    ubers = ridesharingDataFetcher.ubers();
     lyfts = ridesharingDataFetcher.lyfts;
-    ubers = ridesharingDataFetcher.ubers;
-    console.log(pl54Times.length);
-    console.log(plLoopTimes.length);
 }
 
 function sendAllData() {

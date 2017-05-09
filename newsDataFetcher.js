@@ -1,5 +1,5 @@
 /*
-    This JS file is the handles calling the NewsAPI and getting the necessary data from it.
+    This JS file is the handles calling the New York Times API and getting the necessary data from it.
     (C) Rakesh Das https://rakeshdas.com
 */
 
