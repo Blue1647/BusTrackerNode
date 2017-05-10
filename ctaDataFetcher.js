@@ -46,8 +46,7 @@ function getPLData() {
                         }
                     });
                 }
-            }
-            else {
+            } else {
                 pl54Times = [];
                 plLoopTimes = [];
             }
@@ -65,10 +64,9 @@ function get18Data() {
         else if (!err && res.statusCode === 200) {
             var ETAs = body['bustime-response'].prd;
             if (ETAs != null) {
-                if (bus18East.length != 0 && bus18West.length != 0) {
-                    bus18East = [];
-                    bus18West = [];
-                }
+                bus18East = [];
+                bus18West = [];
+                console.log("18 bus size: " + ETAs.length);
                 ETAs.forEach(function (eta) {
                     if (eta.rtdir === "Eastbound") {
                         bus18East.push(eta);
@@ -113,21 +111,39 @@ module.exports = {
     get60Data: get60Data,
     getPLData: getPLData,
     plLoopTimes: function () {
+        if (plLoopTimes.length > 5) {
+            plLoopTimes.slice(0, 5);
+        }
         return plLoopTimes;
     },
     pl54Times: function () {
+        if (pl54Times.length > 5) {
+            pl54Times.slice(0, 5);
+        }
         return pl54Times;
     },
     bus18East: function () {
+        if (bus18East.length > 5) {
+            bus18East.slice(0, 5);
+        }
         return bus18East;
     },
-    bus18West:function () {
+    bus18West: function () {
+        if (bus18West.length > 5) {
+            bus18West.slice(0, 5);
+        }
         return bus18West;
     },
     bus60East: function () {
+        if (bus60East.length > 5) {
+            bus60East.slice(0, 5);
+        }
         return bus60East;
     },
     bus60West: function () {
+        if (bus60West.length > 5) {
+            bus60West.slice(0, 5);
+        }
         return bus60West;
     }
 }
