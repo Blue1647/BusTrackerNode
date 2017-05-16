@@ -12,6 +12,10 @@ var currWeather = []; //array for current weather conditions
 var futureWeather = []; //array for future weather conditions
 
 function getWeatherData() {
+    if(currWeather.length != 0 || futureWeather.length != 0){
+        currWeather = [];
+        futureWeather = [];
+    }
     request({
         url: currWeatherURL,
         json: true
