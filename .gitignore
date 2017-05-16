@@ -49,3 +49,17 @@ jspm_packages
 
 #vscode directory
 .vscode
+.sync-conflict-20170510-180819.gitignore
+views/routes/css/material-fullpalette.css
+views/routes/css/material-fullpalette.css.map
+views/routes/css/material-fullpalette.min.css
+views/routes/css/material-fullpalette.min.css.map
+views/routes/css/material.css
+views/routes/css/material.css.map
+views/routes/css/ripples.css
+views/routes/css/ripples.css.map
+views/routes/css/roboto.css
+views/routes/css/roboto.css.map
+views/routes/js/18Bus.js
+views/routes/js/60Bus.js
+views/routes/js/core.js

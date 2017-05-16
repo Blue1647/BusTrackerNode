@@ -103,6 +103,7 @@ jQuery(function ($) {
         document.getElementById("curr-body").style.backgroundColor = colors.body;
     });
     socket.on('futureWeather', function (data) {
+        console.log(data);
         data.forEach(function (data, i) {
             var dateDay = data.date.weekday;
             var highTemp = data.high.fahrenheit;
@@ -110,6 +111,7 @@ jQuery(function ($) {
             var cond = data.conditions;
             var colors = getColorForTemp(highTemp);
             var dayIco = getIconForCond(cond);
+            console.log("day" + i + "-heading");
             document.getElementById("day" + i + "-heading").innerHTML = dateDay;
             document.getElementById("day" + i + "-heading").style.color = "white";
             document.getElementById("day" + i + "-heading").style.backgroundColor = colors.head;
