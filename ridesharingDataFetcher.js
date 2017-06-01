@@ -83,7 +83,15 @@ function getLyftEtaData() {
     function callback(error, response, body) {
         if (!error && response.statusCode == 200) {
             var json = JSON.parse(response.body);
-            lyfts = json.eta_estimates;
+            lyftArr = json.eta_estimates;
+            if (lyfts.length != 0) lyfts = [];
+            lyftArr.forEach(function(lyft){
+                if(lyft.display_name === "Lyft" || lyft.display_name === "Lyft Line" || lyft.display_name === "Lyft Plus"){
+                    if (lyfts.length < 5){
+                        lyfts.push(lyft)
+                    }
+                }
+            });
         }
 
         else if (response.statusCode == 401) {
